@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CollectPowerConfig : MonoBehaviour
+[System.Serializable]
+public class CollectPowerConfig 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int charCombinationLength;
+    public Text combinationText;
+    public Text rightOrWrong;
 }

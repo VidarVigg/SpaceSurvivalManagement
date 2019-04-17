@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CollectPowerData : MonoBehaviour
+[System.Serializable]
+public class CollectPowerData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string combination;
+    public string right = "RIGHT";
+    public string wrong = "WRONG";
+    public string[] availableCharacters = new string[40]
+    {"A","B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T",
+     "U", "V","W","X","Y","Z","!","?","@","+","/","%","}","&","*","{","]","?","-","_"};
+    //public string combination;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

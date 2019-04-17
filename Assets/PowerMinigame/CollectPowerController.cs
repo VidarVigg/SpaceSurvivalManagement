@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectPowerController : MonoBehaviour
+public class CollectPowerController
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public string GenerateRandomStringCombination(CollectPowerData powerData, CollectPowerConfig powerConfig, string combination)
     {
-        
+        for (int i = 0; i < powerConfig.charCombinationLength; i++)
+        {
+            combination += powerData.availableCharacters[Random.Range(0, powerData.availableCharacters.Length)];
+        }
+        return combination;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
