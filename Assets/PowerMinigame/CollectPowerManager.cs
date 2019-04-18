@@ -13,19 +13,23 @@ public class CollectPowerManager : MonoBehaviour
 
     private void Start()
     {
-        collectPowerConfig.combinationText.text = collectPowerController.GenerateRandomStringCombination(collectPowerData, collectPowerConfig, collectPowerData.combination);
+        collectPowerController.GenerateAndApply( ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
+        //collectPowerController.GenerateRandomStringCombination(ref collectPowerData, collectPowerConfig);
     }
 
     public void CompareTexts(InputField inputField)
     {
-        if (inputField.text == collectPowerConfig.combinationText.text)
-        {
-            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.right));
-        }
-        else
+        if (inputField.text.Length != collectPowerData.combination.Length)
         {
             rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.wrong));
+            return;
         }
+        if (inputField.text != collectPowerData.combination)
+        {
+            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.wrong));
+            return;
+        }
+            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.right));
     }
 
     private IEnumerator DisplayRightOrWrongMessageRoutine(string message)

@@ -35,6 +35,5 @@ public class SpaceTimeManager : MonoBehaviour
             //Debug.Log(spaceTimeData.currentDistance.ToString("0.00"));
             yield return null;
         }
-        yield break;
     }
 }

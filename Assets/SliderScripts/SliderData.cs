@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 [System.Serializable]
-public class SliderData 
+public class SliderData
 {
     public SliderManager.EventStruct[] structArray = null;
     public Vector2 minMaxRandomEvent = Vector2.zero;
