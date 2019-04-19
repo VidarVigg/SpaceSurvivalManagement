@@ -66,7 +66,7 @@ public class SliderManager : MonoBehaviour
         {
             int random = Random.Range(0, testData.structArray.Length);
             yield return new WaitForSeconds(Random.Range(testData.minMaxRandomEvent.x, testData.minMaxRandomEvent.y));
-            for (float i = 5; i > 1; i -= Time.deltaTime)
+            for (float i = 5; i > 0; i -= Time.deltaTime)
             {
                 testData.text.text = "Incoming " + testData.structArray[random].message + " in " + i.ToString("0.0");
                 yield return null;

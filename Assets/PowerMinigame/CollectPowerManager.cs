@@ -8,36 +8,83 @@ public class CollectPowerManager : MonoBehaviour
     [SerializeField] CollectPowerData collectPowerData = new CollectPowerData();
     [SerializeField] CollectPowerConfig collectPowerConfig = new CollectPowerConfig();
     [SerializeField] CollectPowerController collectPowerController = new CollectPowerController();
+    [SerializeField] SliderManager sliderManager = new SliderManager();
     private Coroutine rightOrWrongMessageRoutine;
-
-
-    private void Start()
-    {
-        collectPowerController.GenerateAndApply( ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
-        //collectPowerController.GenerateRandomStringCombination(ref collectPowerData, collectPowerConfig);
-    }
 
     public void CompareTexts(InputField inputField)
     {
+        //IncreaseNumberOfIterations();
         if (inputField.text.Length != collectPowerData.combination.Length)
         {
-            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.wrong));
+            collectPowerConfig.rightOrWrong.color = new Color(255, 0, 0);
+            rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.wrong, inputField));
             return;
         }
         if (inputField.text != collectPowerData.combination)
         {
-            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.wrong));
+            collectPowerConfig.rightOrWrong.color = new Color(255, 0, 0);
+            rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.wrong, inputField));
             return;
         }
-            rightOrWrongMessageRoutine = StartCoroutine(DisplayRightOrWrongMessageRoutine(collectPowerData.right));
+        collectPowerConfig.rightOrWrong.color = new Color(0, 255, 0);
+        rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.right, inputField));
+        sliderManager.IncreasResourceDirectly(1, 10f);
+
+
     }
 
-    private IEnumerator DisplayRightOrWrongMessageRoutine(string message)
+    private IEnumerator RightOrWrongMessageRoutine(string message, InputField inputField)
     {
+        collectPowerConfig.numberOfIterations += 1;
         collectPowerConfig.rightOrWrong.text = message;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         collectPowerConfig.rightOrWrong.text = null;
+        inputField.text = null;
         rightOrWrongMessageRoutine = null;
-        yield break;
+        if (collectPowerConfig.numberOfIterations < 5)
+        {
+            GenerateNewCode();
+        }
+        else
+        {
+            collectPowerConfig.combinationText.text = null;
+            collectPowerConfig.rightOrWrong.text = null;
+            inputField.text = null;
+            rightOrWrongMessageRoutine = null;
+            yield return new WaitForSeconds(0.5f);
+            DeactivateCollectPowerGame();
+            yield break;
+        }
+
+
     }
+
+    public void IncreaseNumberOfIterations()
+    {
+        if (collectPowerConfig.numberOfIterations < 4)
+        {
+            collectPowerConfig.numberOfIterations += 1;
+        }
+        else
+        {
+            DeactivateCollectPowerGame();
+            Debug.Log("Close Panel");
+        }
+    }
+    public void ActivateCollectPowerGame()
+    {
+        collectPowerConfig.collectPowerCanvas.enabled = true;
+        collectPowerController.GenerateAndApply(ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
+    }
+    public void DeactivateCollectPowerGame()
+    {
+        collectPowerConfig.collectPowerCanvas.enabled = false;
+        collectPowerConfig.numberOfIterations = 0;
+    }
+    public void GenerateNewCode()
+    {
+        collectPowerController.GenerateAndApply(ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
+
+    }
+
 }

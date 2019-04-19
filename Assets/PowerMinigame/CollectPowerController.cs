@@ -10,8 +10,6 @@ public class CollectPowerController
     {
         GenerateRandomStringCombination(ref powerData, powerConfig);
         ApplyCharCombo(displayText, ref powerData);
-
-
     }
 
     public void GenerateRandomStringCombination(ref CollectPowerData powerData, CollectPowerConfig powerConfig)
@@ -30,6 +28,7 @@ public class CollectPowerController
 
     public void ApplyCharCombo(Text displayText, ref CollectPowerData powerData)
     {
+
         displayText.text = powerData.combination;
     }
 
