@@ -11,7 +11,7 @@ public class SliderConfig
     public Slider automationSlider;
     public float integritySliderDecreaseAmount;
     public bool automated;
-    public float tardymctardface;
+    public float integrityDecreaseDuration;
     public int exchangeAmount;
     public Text text;
     public Text automatedText;

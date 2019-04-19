@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CollectO2Config
 {
     public Slider o2Slider;
+    public Canvas o2MinigameCanvas;
     public float increaseAmount;
     public float decreaseAmount;
 

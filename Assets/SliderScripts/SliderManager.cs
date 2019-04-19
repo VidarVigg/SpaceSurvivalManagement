@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class SliderManager : MonoBehaviour
 {
 
-    public SliderConfig testConfig = new SliderConfig();
-    public SliderController testController = new SliderController();
-    public SliderData testData = new SliderData();
+    public SliderConfig sliderConfig = new SliderConfig();
+    public SliderController sliderController = new SliderController();
+    public SliderData sliderData = new SliderData();
     public Coroutine automationRout;
     public Coroutine chargeAutomationRout;
 
@@ -34,16 +34,16 @@ public class SliderManager : MonoBehaviour
 
     private void Awake()
     {
-        testData.structArray = testConfig.structArray;
-        testData.minMaxRandomEvent = testConfig.minMaxRandomEvent;
-        testData.integritySlider = testConfig.integritySlider;
-        testData.integritySliderDecreaseAmount = testConfig.integritySliderDecreaseAmount;
-        testData.integrityDecreaseDuration = testConfig.tardymctardface;
-        testData.exchangeAmount = testConfig.exchangeAmount;
-        testData.text = testConfig.text;
-        testData.automationSlider = testConfig.automationSlider;
-        testData.automated = testConfig.automated;
-        testData.automatedText = testConfig.automatedText;
+        sliderData.structArray = sliderConfig.structArray;
+        sliderData.minMaxRandomEvent = sliderConfig.minMaxRandomEvent;
+        sliderData.integritySlider = sliderConfig.integritySlider;
+        sliderData.integritySliderDecreaseAmount = sliderConfig.integritySliderDecreaseAmount;
+        sliderData.integrityDecreaseDuration = sliderConfig.integrityDecreaseDuration;
+        sliderData.exchangeAmount = sliderConfig.exchangeAmount;
+        sliderData.text = sliderConfig.text;
+        sliderData.automationSlider = sliderConfig.automationSlider;
+        sliderData.automated = sliderConfig.automated;
+        sliderData.automatedText = sliderConfig.automatedText;
     }
     private void Start()
     {
@@ -51,9 +51,9 @@ public class SliderManager : MonoBehaviour
     }
     public void CheckIntegrity()
     {
-        if (testData.integritySlider.value <= testConfig.integrityLoseAmt)
+        if (sliderData.integritySlider.value <= sliderConfig.integrityLoseAmt)
         {
-           testData.text.text = GameController.instance.GameOver();
+           sliderData.text.text = GameController.instance.GameOver();
 
         }
     }
@@ -64,17 +64,17 @@ public class SliderManager : MonoBehaviour
 
         while (true)
         {
-            int random = Random.Range(0, testData.structArray.Length);
-            yield return new WaitForSeconds(Random.Range(testData.minMaxRandomEvent.x, testData.minMaxRandomEvent.y));
+            int random = Random.Range(0, sliderData.structArray.Length);
+            yield return new WaitForSeconds(Random.Range(sliderData.minMaxRandomEvent.x, sliderData.minMaxRandomEvent.y));
             for (float i = 5; i > 0; i -= Time.deltaTime)
             {
-                testData.text.text = "Incoming " + testData.structArray[random].message + " in " + i.ToString("0.0");
+                sliderData.text.text = "Incoming " + sliderData.structArray[random].message + " in " + i.ToString("0.0");
                 yield return null;
             }
-            testData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
-            testData.text.text = testData.structArray[random].message;
-            yield return new WaitUntil(() => testData.structArray[random].routine == null);
-            testData.text.text = null;
+            sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
+            sliderData.text.text = sliderData.structArray[random].message;
+            yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
+            sliderData.text.text = null;
 
         }
 
@@ -83,14 +83,14 @@ public class SliderManager : MonoBehaviour
     }
     private IEnumerator EventCoroutine(int index)
     {
-        if (testData.automated == false)
+        if (sliderData.automated == false)
         {
-            for (float i = 0; i < testData.integrityDecreaseDuration; i += Time.deltaTime)
+            for (float i = 0; i < sliderData.integrityDecreaseDuration; i += Time.deltaTime)
             {
-                testController.DecreaseValue(ref testData.integritySlider, testData.integritySliderDecreaseAmount * Time.deltaTime);
+                sliderController.DecreaseValue(ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
-            testData.structArray[index].routine = null;
+            sliderData.structArray[index].routine = null;
             yield break;
         }
 
@@ -100,7 +100,7 @@ public class SliderManager : MonoBehaviour
 
             for (; ;)
             {
-                testController.DecreaseValue(ref testData.integritySlider, testData.integritySliderDecreaseAmount * Time.deltaTime);
+                sliderController.DecreaseValue(ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
             yield break;
@@ -127,9 +127,9 @@ public class SliderManager : MonoBehaviour
     public void StopDecreaseIntegrityDueToLackOfResources()
     {
 
-        for (int i = 0; i < testData.structArray.Length; i++)
+        for (int i = 0; i < sliderData.structArray.Length; i++)
         {
-            if (testData.structArray[i].slider.value < 10)
+            if (sliderData.structArray[i].slider.value < 10)
             {
                 return;
             }
@@ -148,19 +148,19 @@ public class SliderManager : MonoBehaviour
 
     public void StopEvent(int index)
     {
-        if (testData.structArray[index].routine != null)
+        if (sliderData.structArray[index].routine != null)
         {
-            if (testData.structArray[index].counterSlider.value >= 20)
+            if (sliderData.structArray[index].counterSlider.value >= 20)
             {
                 
-                StopCoroutine(testData.structArray[index].routine);
-                testData.structArray[index].routine = null;
-                testController.DecreaseValue(ref testData.structArray[index].counterSlider, 20);
+                StopCoroutine(sliderData.structArray[index].routine);
+                sliderData.structArray[index].routine = null;
+                sliderController.DecreaseValue(ref sliderData.structArray[index].counterSlider, 20);
 
             }
             else
             {
-                testData.text.text = "Insufficient Resource!!1!!111 1 1!";
+                sliderData.text.text = "Insufficient Resource!!1!!111 1 1!";
             }
         }
     }
@@ -168,36 +168,36 @@ public class SliderManager : MonoBehaviour
     public void ExchangeResources(int index)
     {
 
-        if (testData.structArray[index].counterSlider.value < testData.exchangeAmount || testData.structArray[index].slider.value + testData.exchangeAmount > testData.structArray[index].slider.maxValue)
+        if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount || sliderData.structArray[index].slider.value + sliderData.exchangeAmount > sliderData.structArray[index].slider.maxValue)
         {
 
-            if (testData.structArray[index].counterSlider.value < testData.exchangeAmount)
+            if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount)
             {
-                testController.ExchangeResources(ref testData.structArray[index].slider, ref testData.structArray[index].counterSlider, testData.structArray[index].counterSlider.value);
+                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value);
             }
 
             else
             {
-                testController.ExchangeResources(ref testData.structArray[index].slider, ref testData.structArray[index].counterSlider, testData.structArray[index].slider.maxValue - testData.structArray[index].slider.value);
+                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].slider.maxValue - sliderData.structArray[index].slider.value);
             }
 
         }
         else
         {
-            testController.ExchangeResources(ref testData.structArray[index].slider, ref testData.structArray[index].counterSlider, testData.exchangeAmount);
+            sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.exchangeAmount);
         }
 
     }
 
     public void IncreasResourceDirectly(int index, float amount)
     {
-        testController.IncreaseValue(ref testData.structArray[index].slider, amount);
+        sliderController.IncreaseValue(ref sliderData.structArray[index].slider, amount);
 
     }
     public void DecreaseResourceDirectly(int index, float amount)
     {
-        testController.DecreaseValue(ref testData.structArray[index].slider, amount);
-        if (testData.structArray[index].slider.value <= 6)
+        sliderController.DecreaseValue(ref sliderData.structArray[index].slider, amount);
+        if (sliderData.structArray[index].slider.value <= 6)
         {
             Debug.Log("ResourceDepleted");
         }
@@ -214,17 +214,17 @@ public class SliderManager : MonoBehaviour
     }
     private IEnumerator CounterMesureAutomationRoutine()
     {
-        testData.automated = true;
-        testData.automatedText.text = "Counter Measures Automated";
-        for (float i = testData.automationSlider.value; i > 0; i -= Time.deltaTime)
+        sliderData.automated = true;
+        sliderData.automatedText.text = "Counter Measures Automated";
+        for (float i = sliderData.automationSlider.value; i > 0; i -= Time.deltaTime)
         {
-            testController.DecreaseValue(ref testData.automationSlider, 0.05f);
-            if (testData.automationSlider.value <= 2)
+            sliderController.DecreaseValue(ref sliderData.automationSlider, 0.05f);
+            if (sliderData.automationSlider.value <= 2)
             {
-                testData.automated = false;
+                sliderData.automated = false;
                 Debug.Log("Finished");
-                testData.automatedText.text = null;
-                testData.text.text = null;
+                sliderData.automatedText.text = null;
+                sliderData.text.text = null;
                 automationRout = null;
                 if (chargeAutomationRout == null)
                 {
@@ -243,10 +243,10 @@ public class SliderManager : MonoBehaviour
     private IEnumerator ChargeCounterMeasureAutomationRoutine()
     {
         automationRout = null;
-        for (float i = testData.automationSlider.value; i < testData.automationSlider.maxValue; i += Time.deltaTime)
+        for (float i = sliderData.automationSlider.value; i < sliderData.automationSlider.maxValue; i += Time.deltaTime)
         {
-            testController.IncreaseValue(ref testData.automationSlider, 0.02f);
-            if (testData.automationSlider.value >= testData.automationSlider.maxValue)
+            sliderController.IncreaseValue(ref sliderData.automationSlider, 0.02f);
+            if (sliderData.automationSlider.value >= sliderData.automationSlider.maxValue)
             {
                 Debug.Log("Charged");
                 chargeAutomationRout = null;
