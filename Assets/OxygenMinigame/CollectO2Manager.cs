@@ -8,24 +8,30 @@ public class CollectO2Manager : MonoBehaviour
     public CollectO2Data collectO2Data = new CollectO2Data();
     public CollectO2Controller collectO2Controller = new CollectO2Controller();
     public SliderController sliderController = new SliderController();
+    Coroutine o2Routine;
 
     private void Start()
     {
-        StartCoroutine(DecreaseO2Value());
+       
     }
     public void IncreaseO2ValueOnButtonPress()
     {
+        if (o2Routine == null)
+        {
+            o2Routine = StartCoroutine(DecreaseO2Value());
+        }
         collectO2Controller.IncreaseO2Value(ref collectO2Config.o2Slider, collectO2Config);
     }
 
     private IEnumerator DecreaseO2Value()
     {
-        for (float i = collectO2Config.o2Slider.value; i > collectO2Config.o2Slider.minValue; i -= Time.deltaTime)
+        for (; ; )
         {
-            sliderController.DecreaseValue(ref collectO2Config.o2Slider,1 * Time.deltaTime);
+            sliderController.DecreaseValue(ref collectO2Config.o2Slider, 10f * Time.deltaTime);
+            yield return null;
             if (collectO2Config.o2Slider.value < 1)
             {
-                Debug.Log("Finished");
+                o2Routine = null;
                 yield break;
             }
         }
