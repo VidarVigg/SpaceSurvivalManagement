@@ -57,7 +57,7 @@ public class CollectFuelManager : MonoBehaviour
     }
     private IEnumerator EventifyRandomButton()
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 5; j++)
         {
             int rand = Random.Range(0, collectFuelData.buttons.Length);
             collectFuelController.ActivateGoodButton(this, collectFuelData.buttons[rand], collectFuelData.newColor);

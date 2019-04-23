@@ -19,7 +19,7 @@ public class SliderController
     public void ExchangeResources(ref Slider increase, ref Slider decrease, float amt = 1f)
     {
         IncreaseValue(ref increase, amt);
-        DecreaseValue(ref decrease, amt);
+        DecreaseValue(ref decrease, amt + 5);
     }
 
 

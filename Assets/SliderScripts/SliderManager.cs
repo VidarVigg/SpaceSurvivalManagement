@@ -51,10 +51,10 @@ public class SliderManager : MonoBehaviour
     }
     public void CheckIntegrity()
     {
-        if (sliderData.integritySlider.value <= sliderConfig.integrityLoseAmt)
+        if (sliderData.integritySlider.value <= 1 /*sliderConfig.integrityLoseAmt*/)
         {
-           sliderData.text.text = GameController.instance.GameOver();
-
+            //sliderData.text.text = GameController.instance.GameOver();
+            GameController.instance.GameOver();
         }
     }
 

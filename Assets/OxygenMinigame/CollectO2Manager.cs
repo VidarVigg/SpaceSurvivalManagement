@@ -25,13 +25,13 @@ public class CollectO2Manager : MonoBehaviour
             o2Routine = StartCoroutine(DecreaseO2Value());
         }
         collectO2Controller.IncreaseO2Value(ref collectO2Config.o2Slider, collectO2Config);
-        if (collectO2Config.o2Slider.value >= 50 && activated1 == false)
+        if (collectO2Config.o2Slider.value >= 40 && activated1 == false)
         {
-            sliderManager.IncreasResourceDirectly(2, 5);
+            sliderManager.IncreasResourceDirectly(2, 10);
             Debug.Log("Hello1");
             activated1 = true;
         }
-        if (collectO2Config.o2Slider.value >= 70 && activated2 == false)
+        if (collectO2Config.o2Slider.value >= 60 && activated2 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
             Debug.Log("Hello2");
@@ -39,13 +39,13 @@ public class CollectO2Manager : MonoBehaviour
         }
         if (collectO2Config.o2Slider.value >= 80 && activated3 == false)
         {
-            sliderManager.IncreasResourceDirectly(2, 25);
+            sliderManager.IncreasResourceDirectly(2, 10);
             Debug.Log("Hello3");
             activated3 = true;
         }
-        if (collectO2Config.o2Slider.value >= 90 && activated4 == false)
+        if (collectO2Config.o2Slider.value >= 99 && activated4 == false)
         {
-            sliderManager.IncreasResourceDirectly(2, 30);
+            sliderManager.IncreasResourceDirectly(2, 10);
             Debug.Log("Hello4");
             activated4 = true;
         }
