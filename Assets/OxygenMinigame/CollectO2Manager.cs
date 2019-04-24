@@ -68,7 +68,8 @@ public class CollectO2Manager : MonoBehaviour
 
     public void ActivateO2Minigame()
     {
-        collectO2Config.o2MinigameCanvas.enabled = true;
+        //collectO2Config.o2MinigameCanvas.enabled = true;
+        ItweenManager.instance.ItweenMoveTo(1);
     }
     public void DeactivateO2Minigame()
     {
@@ -77,8 +78,8 @@ public class CollectO2Manager : MonoBehaviour
         activated3 = false;
         activated4 = false;
         o2Routine = null;
-        collectO2Config.o2MinigameCanvas.enabled = false;
-
+        //collectO2Config.o2MinigameCanvas.enabled = false;
+        ItweenManager.instance.ItweenMoveBack(1);
     }
 
 

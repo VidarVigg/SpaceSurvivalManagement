@@ -73,12 +73,14 @@ public class CollectPowerManager : MonoBehaviour
     }
     public void ActivateCollectPowerGame()
     {
-        collectPowerConfig.collectPowerCanvas.enabled = true;
+        ItweenManager.instance.ItweenMoveTo(2);
+        //collectPowerConfig.collectPowerCanvas.enabled = true;
         collectPowerController.GenerateAndApply(ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
     }
     public void DeactivateCollectPowerGame()
     {
-        collectPowerConfig.collectPowerCanvas.enabled = false;
+        ItweenManager.instance.ItweenMoveBack(2);
+        //collectPowerConfig.collectPowerCanvas.enabled = false;
         collectPowerConfig.numberOfIterations = 0;
     }
     public void GenerateNewCode()

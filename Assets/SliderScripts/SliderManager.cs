@@ -47,7 +47,10 @@ public class SliderManager : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(RandomEventRoutine());
+        if (!TutorialController.instance)
+        {
+            StartCoroutine(RandomEventRoutine());
+        }
     }
     public void CheckIntegrity()
     {
@@ -65,14 +68,17 @@ public class SliderManager : MonoBehaviour
         while (true)
         {
             int random = Random.Range(0, sliderData.structArray.Length);
+
             yield return new WaitForSeconds(Random.Range(sliderData.minMaxRandomEvent.x, sliderData.minMaxRandomEvent.y));
             for (float i = 5; i > 0; i -= Time.deltaTime)
             {
                 sliderData.text.text = "Incoming " + sliderData.structArray[random].message + " in " + i.ToString("0.0");
                 yield return null;
             }
-            sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
             sliderData.text.text = sliderData.structArray[random].message;
+            ItweenManager.instance.PunchScaleText(sliderData.text);
+
+            sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
             yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
             sliderData.text.text = null;
 
@@ -150,17 +156,17 @@ public class SliderManager : MonoBehaviour
     {
         if (sliderData.structArray[index].routine != null)
         {
-            if (sliderData.structArray[index].counterSlider.value >= 20)
+            if (sliderData.structArray[index].counterSlider.value >= 10)
             {
                 
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
-                sliderController.DecreaseValue(ref sliderData.structArray[index].counterSlider, 20);
+                sliderController.DecreaseValue(ref sliderData.structArray[index].counterSlider, 10);
 
             }
             else
             {
-                sliderData.text.text = "Insufficient Resource!!1!!111 1 1!";
+                sliderData.text.text = "INSUFFICIENT RESOURCE";
             }
         }
     }
@@ -204,7 +210,13 @@ public class SliderManager : MonoBehaviour
     }
     public void ActivateCounterMeasureAutomation()
     {
-
+        for (int i = 0; i < sliderData.structArray.Length; i++)
+        {
+            if(sliderData.structArray[i].routine != null)
+            {
+                StopEvent(i);
+            }
+        }
         if (automationRout == null)
         {
             automationRout = StartCoroutine(CounterMesureAutomationRoutine());
@@ -216,6 +228,7 @@ public class SliderManager : MonoBehaviour
     {
         sliderData.automated = true;
         sliderData.automatedText.text = "Counter Measures Automated";
+        ItweenManager.instance.PunchScaleText(sliderData.automatedText);
         for (float i = sliderData.automationSlider.value; i > 0; i -= Time.deltaTime)
         {
             sliderController.DecreaseValue(ref sliderData.automationSlider, 0.05f);

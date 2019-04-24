@@ -37,7 +37,8 @@ public class CollectFuelManager : MonoBehaviour
     private Coroutine routine;
     public void ActivateCollectFuelMiniGame()
     {
-        collectFuelData.collectFuelCanvas.enabled = true;
+        //collectFuelData.collectFuelCanvas.enabled = true;
+            ItweenManager.instance.ItweenMoveTo(0);
         if (routine == null)
         {
             routine = StartCoroutine(SpawnButtonsRoutine());
@@ -67,7 +68,8 @@ public class CollectFuelManager : MonoBehaviour
 
         }
         yield return new WaitForSeconds(1);
-        collectFuelData.collectFuelCanvas.enabled = false;
+        //collectFuelData.collectFuelCanvas.enabled = false;
+        ItweenManager.instance.ItweenMoveBack(0);
         NullAllButtons();
         routine = null;
         yield return null;
