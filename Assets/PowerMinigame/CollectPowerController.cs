@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class CollectPowerController
 {
-    public void GenerateAndApply(ref CollectPowerData powerData, CollectPowerConfig powerConfig, Text displayText)
+    public void GenerateAndApply(ref CollectPowerData powerData, CollectPowerConfig powerConfig, TextMeshProUGUI displayText)
     {
         GenerateRandomStringCombination(ref powerData, powerConfig);
         ApplyCharCombo(displayText, ref powerData);
@@ -26,7 +26,7 @@ public class CollectPowerController
 
     }
 
-    public void ApplyCharCombo(Text displayText, ref CollectPowerData powerData)
+    public void ApplyCharCombo(TextMeshProUGUI displayText, ref CollectPowerData powerData)
     {
 
         displayText.text = powerData.combination;

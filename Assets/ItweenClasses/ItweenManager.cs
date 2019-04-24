@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [ExecuteInEditMode]
 public class ItweenManager : MonoBehaviour
@@ -63,9 +64,9 @@ public class ItweenManager : MonoBehaviour
     {
         iTween.PunchScale(slider.gameObject, Vector3.one, 1f);
     }
-    public void PunchScaleText(Text text)
+    public void PunchScaleText(TextMeshProUGUI text)
     {
-        iTween.PunchScale(text.gameObject, Vector3.one, 5f);
+        iTween.PunchScale(text.gameObject, Vector3.one, 1f);
     }
 
 }

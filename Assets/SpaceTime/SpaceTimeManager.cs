@@ -26,7 +26,7 @@ public class SpaceTimeManager : MonoBehaviour
         for(; ; )
         {
             spaceTimeController.CalculateDistance(this, Time.deltaTime, spaceTimeData.velocity);
-            spaceTimeData.distanceText.text = "Light Years to goal " + spaceTimeData.currentDistance.ToString("0.00");
+            spaceTimeData.distanceText.text = "LIGHT YEARS TO GOAL " + spaceTimeData.currentDistance.ToString("0.00");
             if (spaceTimeData.currentDistance < 1)
             {
                 spaceTimeData.distanceText.text = "You Win: You Made it home";

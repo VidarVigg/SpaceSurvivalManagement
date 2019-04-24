@@ -28,25 +28,25 @@ public class CollectO2Manager : MonoBehaviour
         if (collectO2Config.o2Slider.value >= 40 && activated1 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-            Debug.Log("Hello1");
+
             activated1 = true;
         }
         if (collectO2Config.o2Slider.value >= 60 && activated2 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-            Debug.Log("Hello2");
+
             activated2 = true;
         }
         if (collectO2Config.o2Slider.value >= 80 && activated3 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-            Debug.Log("Hello3");
+
             activated3 = true;
         }
         if (collectO2Config.o2Slider.value >= 99 && activated4 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-            Debug.Log("Hello4");
+
             activated4 = true;
         }
     }

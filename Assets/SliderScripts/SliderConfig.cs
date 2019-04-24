@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 [System.Serializable]
 public class SliderConfig 
 {
@@ -13,7 +14,7 @@ public class SliderConfig
     public bool automated;
     public float integrityDecreaseDuration;
     public int exchangeAmount;
-    public Text text;
-    public Text automatedText;
+    public TextMeshProUGUI informationText;
+    public TextMeshProUGUI automatedText;
     public float integrityLoseAmt;
 }

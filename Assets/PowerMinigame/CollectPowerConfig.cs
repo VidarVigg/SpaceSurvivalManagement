@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class CollectPowerConfig 
@@ -9,6 +10,6 @@ public class CollectPowerConfig
     public Canvas collectPowerCanvas;
     public int numberOfIterations;
     public int charCombinationLength;
-    public Text combinationText;
+    public TextMeshProUGUI combinationText;
     public Text rightOrWrong;
 }

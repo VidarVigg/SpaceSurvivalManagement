@@ -40,7 +40,7 @@ public class SliderManager : MonoBehaviour
         sliderData.integritySliderDecreaseAmount = sliderConfig.integritySliderDecreaseAmount;
         sliderData.integrityDecreaseDuration = sliderConfig.integrityDecreaseDuration;
         sliderData.exchangeAmount = sliderConfig.exchangeAmount;
-        sliderData.text = sliderConfig.text;
+        sliderData.text = sliderConfig.informationText;
         sliderData.automationSlider = sliderConfig.automationSlider;
         sliderData.automated = sliderConfig.automated;
         sliderData.automatedText = sliderConfig.automatedText;
@@ -72,7 +72,7 @@ public class SliderManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(sliderData.minMaxRandomEvent.x, sliderData.minMaxRandomEvent.y));
             for (float i = 5; i > 0; i -= Time.deltaTime)
             {
-                sliderData.text.text = "Incoming " + sliderData.structArray[random].message + " in " + i.ToString("0.0");
+                sliderData.text.text = "INCOMING " + sliderData.structArray[random].message + " IN " + i.ToString("0.0");
                 yield return null;
             }
             sliderData.text.text = sliderData.structArray[random].message;
@@ -261,7 +261,6 @@ public class SliderManager : MonoBehaviour
             sliderController.IncreaseValue(ref sliderData.automationSlider, 0.02f);
             if (sliderData.automationSlider.value >= sliderData.automationSlider.maxValue)
             {
-                Debug.Log("Charged");
                 chargeAutomationRout = null;
                 yield break;
             }

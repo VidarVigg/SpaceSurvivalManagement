@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 [System.Serializable]
 public class SpaceTimeConfig
 {
     public float timeToGoal;
     public float distanceToGoal;
-    public Text distanceText;
+    public TextMeshProUGUI distanceText;
 }
