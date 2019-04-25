@@ -68,7 +68,7 @@ public class CollectPowerManager : MonoBehaviour
         else
         {
             DeactivateCollectPowerGame();
-            Debug.Log("Close Panel");
+
         }
     }
     public void ActivateCollectPowerGame()

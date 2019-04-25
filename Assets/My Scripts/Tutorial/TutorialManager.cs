@@ -69,12 +69,12 @@ public class TutorialManager : MonoBehaviour
         if (currentPrompt == 7)
         {
             ItweenManager.instance.ItweenMoveBack(2);
-            sliderManager.sliderData.text.text = "Catastrophe Notifications";
+            sliderManager.sliderData.informationText.text = "Catastrophe Notifications";
 
         }
         if (currentPrompt == 8)
         {
-            sliderManager.sliderData.text.text = null;
+            sliderManager.sliderData.informationText.text = null;
 
         }
         if (currentPrompt == 9)
@@ -101,7 +101,7 @@ public class TutorialManager : MonoBehaviour
     {
         for (float i = 5; i > 0; i -= Time.deltaTime)
         {
-            tutorialText.text = prompts[currentPrompt].tutorialMessage + i.ToString("0.0") + " sec.";
+            sliderManager.sliderData.informationText.text = prompts[currentPrompt].tutorialMessage + i.ToString("0.0") + " sec.";
             yield return null;
         }
             SceneManager.LoadScene("SampleScene");

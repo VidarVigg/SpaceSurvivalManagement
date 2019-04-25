@@ -16,7 +16,7 @@ public class SliderData
     public float integrityDecreaseDuration;
     public bool automated;
     public int exchangeAmount;
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI informationText;
     public TextMeshProUGUI automatedText;
 }
 

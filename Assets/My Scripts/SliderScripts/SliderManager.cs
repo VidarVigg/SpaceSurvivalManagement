@@ -42,7 +42,7 @@ public class SliderManager : MonoBehaviour
         sliderData.integritySliderDecreaseAmount = sliderConfig.integritySliderDecreaseAmount;
         sliderData.integrityDecreaseDuration = sliderConfig.integrityDecreaseDuration;
         sliderData.exchangeAmount = sliderConfig.exchangeAmount;
-        sliderData.text = sliderConfig.informationText;
+        sliderData.informationText = sliderConfig.informationText;
         sliderData.automationSlider = sliderConfig.automationSlider;
         sliderData.automated = sliderConfig.automated;
         sliderData.automatedText = sliderConfig.automatedText;
@@ -80,15 +80,15 @@ public class SliderManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(sliderData.minMaxRandomEvent.x, sliderData.minMaxRandomEvent.y));
             for (float i = 5; i > 0; i -= Time.deltaTime)
             {
-                sliderData.text.text = "INCOMING " + sliderData.structArray[random].message + " IN " + i.ToString("0.0");
+                sliderData.informationText.text = "INCOMING " + sliderData.structArray[random].message + " IN " + i.ToString("0.0");
                 yield return null;
             }
-            sliderData.text.text = sliderData.structArray[random].message;
-            ItweenManager.instance.PunchScaleText(sliderData.text);
+            sliderData.informationText.text = sliderData.structArray[random].message;
+            ItweenManager.instance.PunchScaleText(sliderData.informationText);
 
             sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
             yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
-            sliderData.text.text = null;
+            sliderData.informationText.text = null;
 
         }
 
@@ -171,7 +171,7 @@ public class SliderManager : MonoBehaviour
             }
             else
             {
-                sliderData.text.text = "INSUFFICIENT RESOURCE";
+                sliderData.informationText.text = "INSUFFICIENT RESOURCE";
             }
         }
     }
@@ -260,7 +260,7 @@ public class SliderManager : MonoBehaviour
                 sliderData.automated = false;
                 Debug.Log("Finished");
                 sliderData.automatedText.text = null;
-                sliderData.text.text = null;
+                sliderData.informationText.text = null;
                 automationRout = null;
                 if (chargeAutomationRout == null)
                 {
