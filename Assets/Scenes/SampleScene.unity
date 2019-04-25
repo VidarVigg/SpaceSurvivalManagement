@@ -1064,7 +1064,7 @@ MonoBehaviour:
     integrityDecreaseDuration: 0
     automated: 0
     exchangeAmount: 0
-    text: {fileID: 0}
+    informationText: {fileID: 0}
     automatedText: {fileID: 0}
   textFeedbackPrefab: {fileID: 1500315691}
   numberfeedback: {fileID: 1226539645}
@@ -11704,7 +11704,7 @@ MonoBehaviour:
   collectPowerConfig:
     collectPowerCanvas: {fileID: 1010109415}
     numberOfIterations: 0
-    charCombinationLength: 4
+    charCombinationLength: 3
     combinationText: {fileID: 77663610}
     rightOrWrong: {fileID: 188515504}
   sliderManager: {fileID: 105419063}
@@ -11828,8 +11828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceTimeConfig:
-    timeToGoal: 10
-    distanceToGoal: 626.27
+    timeToGoal: 200
+    distanceToGoal: 600
     distanceText: {fileID: 610685777}
   spaceTimeData:
     currentDistance: 0
@@ -14192,8 +14192,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 97ae9fd575a22e34c88bdba6bf911487, type: 2}
-  m_sharedMaterial: {fileID: 21550641923235238, guid: 97ae9fd575a22e34c88bdba6bf911487,
+  m_fontAsset: {fileID: 11400000, guid: 9dc8528ce9ef4d64cb1ff985e5e10f0e, type: 2}
+  m_sharedMaterial: {fileID: 21550641923235238, guid: 9dc8528ce9ef4d64cb1ff985e5e10f0e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

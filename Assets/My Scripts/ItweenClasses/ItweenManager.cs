@@ -64,9 +64,9 @@ public class ItweenManager : MonoBehaviour
     {
         iTween.PunchScale(slider.gameObject, Vector3.one, 0.3f);
     }
-    public void PunchScaleText(TextMeshProUGUI text)
+    public void PunchScaleText(TextMeshProUGUI text , float time = 0.3f)
     {
-        iTween.PunchScale(text.gameObject, Vector3.one, 0.3f);
+        iTween.PunchScale(text.gameObject, Vector3.one, time);
     }
 
 }

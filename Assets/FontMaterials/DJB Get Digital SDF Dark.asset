@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: DJB Get Digital SDF Dark
   m_EditorClassIdentifier: 
-  hashCode: 1757266801
+  hashCode: 1317615885
   material: {fileID: 21550641923235238}
   materialHashCode: -345149478
   fontAssetType: 1

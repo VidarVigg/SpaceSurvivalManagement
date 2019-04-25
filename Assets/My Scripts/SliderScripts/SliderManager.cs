@@ -12,6 +12,7 @@ public class SliderManager : MonoBehaviour
     public SliderData sliderData = new SliderData();
     public Coroutine automationRout;
     public Coroutine chargeAutomationRout;
+    private Coroutine decreaseintegrityDueToLackOfResources;
     public GameObject textFeedbackPrefab;
     public NumberFeedback numberfeedback;
 
@@ -59,7 +60,7 @@ public class SliderManager : MonoBehaviour
     {
         GameObject textClone = Instantiate(textFeedbackPrefab, sliderData.textFeedbackCanvas);
         Destroy(textClone, 1);
-        
+
     }
     public void CheckIntegrity()
     {
@@ -84,7 +85,7 @@ public class SliderManager : MonoBehaviour
                 yield return null;
             }
             sliderData.informationText.text = sliderData.structArray[random].message;
-            ItweenManager.instance.PunchScaleText(sliderData.informationText);
+            ItweenManager.instance.PunchScaleText(sliderData.informationText, 3);
 
             sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
             yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
@@ -112,24 +113,23 @@ public class SliderManager : MonoBehaviour
     private IEnumerator DecreaseIntegrityDueToLackOfResourcesRoutine()
     {
 
-            for (; ;)
-            {
+        for (; ; )
+        {
             sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
-                yield return null;
-            }
-            yield break;
-        
+            yield return null;
+        }
+        yield break;
+
 
     }
-    private Coroutine dec;
     public void DecreaseIntegrityDueToLackOfResources(Slider slider)
-    { 
-        if(slider.value < 10)
+    {
+        if (slider.value < 10)
         {
-            if(dec == null)
+            if (decreaseintegrityDueToLackOfResources == null)
             {
 
-            dec = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine()); //if not already active
+                decreaseintegrityDueToLackOfResources = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine()); //if not already active
             }
         }
         else
@@ -149,12 +149,12 @@ public class SliderManager : MonoBehaviour
             }
 
         }
-        
-        if(dec != null)
-        {
-        StopCoroutine(dec);
 
-        dec = null;
+        if (decreaseintegrityDueToLackOfResources != null)
+        {
+            StopCoroutine(decreaseintegrityDueToLackOfResources);
+
+            decreaseintegrityDueToLackOfResources = null;
         }
     }
     public void StopEvent(int index)
@@ -163,7 +163,7 @@ public class SliderManager : MonoBehaviour
         {
             if (sliderData.structArray[index].counterSlider.value >= 10)
             {
-                
+
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 10);
@@ -235,7 +235,7 @@ public class SliderManager : MonoBehaviour
     {
         for (int i = 0; i < sliderData.structArray.Length; i++)
         {
-            if(sliderData.structArray[i].routine != null)
+            if (sliderData.structArray[i].routine != null)
             {
                 StopEvent(i);
             }
@@ -265,7 +265,7 @@ public class SliderManager : MonoBehaviour
                 if (chargeAutomationRout == null)
                 {
 
-                   chargeAutomationRout = StartCoroutine(ChargeCounterMeasureAutomationRoutine());
+                    chargeAutomationRout = StartCoroutine(ChargeCounterMeasureAutomationRoutine());
                 }
                 yield return null;
                 yield break;
