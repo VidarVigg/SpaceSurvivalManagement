@@ -25,6 +25,10 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialProgressFwd()
     { 
+        if (currentPrompt == 10)
+        {
+            return;
+        }
             currentPrompt += 1;
             TutorialProgress(currentPrompt);
         
@@ -36,6 +40,7 @@ public class TutorialManager : MonoBehaviour
             currentPrompt -= 1;
             TutorialProgress(currentPrompt);
         }
+
 
     }
 
@@ -70,18 +75,29 @@ public class TutorialManager : MonoBehaviour
         if (currentPrompt == 8)
         {
             sliderManager.sliderData.text.text = null;
+
+        }
+        if (currentPrompt == 9)
+        {
+            ItweenManager.instance.ItweenMoveBack(3);
         }
         if (currentPrompt == 10)
         {
-            Destroy(nextButton);
-            StartCoroutine(StartGame());
+
+            ItweenManager.instance.ItweenMoveTo(3);
+
         }
     }
     public void PunchToHilightPanel(RectTransform panel,int index)
     {
         iTween.PunchScale(prompts[index].panel.gameObject,new Vector3(0.5f, 0.5f, 0.5f), 2f);
     }
-    private IEnumerator StartGame()
+    public void StartGame()
+    {
+        ItweenManager.instance.ItweenMoveBack(3);
+        StartCoroutine(StartGameRoutine());
+    }
+    private IEnumerator StartGameRoutine()
     {
         for (float i = 5; i > 0; i -= Time.deltaTime)
         {

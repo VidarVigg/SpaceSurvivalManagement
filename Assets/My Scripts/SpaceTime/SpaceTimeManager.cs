@@ -18,10 +18,15 @@ public class SpaceTimeManager : MonoBehaviour
         spaceTimeData.currentDistance = spaceTimeConfig.distanceToGoal;
         spaceTimeData.velocity = spaceTimeConfig.distanceToGoal / spaceTimeConfig.timeToGoal;
 
-        StartCoroutine(Upd8());
+        startDecreaseLightyears();
     }
 
-    private IEnumerator Upd8()
+    public void startDecreaseLightyears()
+    {
+        StartCoroutine(DecreaseLightYears());
+    }
+
+    private IEnumerator DecreaseLightYears()
     {
         for(; ; )
         {
@@ -29,7 +34,7 @@ public class SpaceTimeManager : MonoBehaviour
             spaceTimeData.distanceText.text = "LIGHT YEARS TO GOAL " + spaceTimeData.currentDistance.ToString("0.00");
             if (spaceTimeData.currentDistance < 1)
             {
-                spaceTimeData.distanceText.text = "You Win: You Made it home";
+                GameController.instance.Win();
                 yield break;
             }
             //Debug.Log(spaceTimeData.currentDistance.ToString("0.00"));

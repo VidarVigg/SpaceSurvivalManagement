@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     [SerializeField] Canvas loseCanvas;
+    [SerializeField] Canvas winCanvas;
     public static GameController instance;
     
 
@@ -21,14 +22,19 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
+    }
+    
     public void GameOver()
     {
 
         loseCanvas.enabled = true;
-        //string gameOver = "The Ship was destroyed";
-        //return gameOver;
+
+    }
+
+    public void Win()
+    {
+        winCanvas.enabled = true;
     }
     public void RestartGame()
     {
@@ -37,7 +43,8 @@ public class GameController : MonoBehaviour
     }
     public void Quit()
     {
-        Debug.Log("Quit");
+        Application.Quit();
+
     }
 
 }
