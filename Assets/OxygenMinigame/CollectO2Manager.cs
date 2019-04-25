@@ -55,7 +55,7 @@ public class CollectO2Manager : MonoBehaviour
     {
         for (; ; )
         {
-            sliderManager.sliderController.DecreaseValue(ref collectO2Config.o2Slider, 10f * Time.deltaTime);
+            sliderManager.sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref collectO2Config.o2Slider, 10f * Time.deltaTime);
             yield return null;
             if (collectO2Config.o2Slider.value < 1)
             {

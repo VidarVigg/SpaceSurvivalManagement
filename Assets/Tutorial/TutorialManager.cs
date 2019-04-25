@@ -16,19 +16,36 @@ public class TutorialManager : MonoBehaviour
     public CollectPowerManager collectPowerManager;
     public SliderManager sliderManager;
     public GameObject nextButton;
+    
 
     private void Awake()
     {
         tutorialText.text = prompts[currentPrompt].tutorialMessage;
     }
 
-    public void TutorialProgress()
+    public void TutorialProgressFwd()
+    { 
+            currentPrompt += 1;
+            TutorialProgress(currentPrompt);
+        
+    }
+    public void TutorialProgressBack()
     {
-        currentPrompt += 1;
-        tutorialText.text = prompts[currentPrompt].tutorialMessage;
+        if (currentPrompt != 0)
+        {
+            currentPrompt -= 1;
+            TutorialProgress(currentPrompt);
+        }
+
+    }
+
+    public void TutorialProgress(int progress)
+    {
+
+        tutorialText.text = prompts[progress].tutorialMessage;
         if (prompts[currentPrompt].punch != false)
         {
-        PunchToHilightPanel(prompts[currentPrompt].panel, currentPrompt);
+        PunchToHilightPanel(prompts[progress].panel, currentPrompt);
         }
         if (currentPrompt == 4)
         {
@@ -62,7 +79,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void PunchToHilightPanel(RectTransform panel,int index)
     {
-        iTween.PunchScale(prompts[index].panel.gameObject, Vector3.one, 2f);
+        iTween.PunchScale(prompts[index].panel.gameObject,new Vector3(0.5f, 0.5f, 0.5f), 2f);
     }
     private IEnumerator StartGame()
     {

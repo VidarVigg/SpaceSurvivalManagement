@@ -9,6 +9,7 @@ public class SliderData
 {
     public SliderManager.EventStruct[] structArray = null;
     public Vector2 minMaxRandomEvent = Vector2.zero;
+    public Transform textFeedbackCanvas;
     public Slider integritySlider;
     public Slider automationSlider;
     public float integritySliderDecreaseAmount;

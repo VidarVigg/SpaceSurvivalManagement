@@ -7,6 +7,7 @@ using TMPro;
 public class SliderConfig 
 {
     public SliderManager.EventStruct[] structArray = null;
+    public Transform textFeedbackCanvas;
     public Vector2 minMaxRandomEvent = Vector2.zero;
     public Slider integritySlider;
     public Slider automationSlider;

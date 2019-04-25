@@ -12,6 +12,8 @@ public class SliderManager : MonoBehaviour
     public SliderData sliderData = new SliderData();
     public Coroutine automationRout;
     public Coroutine chargeAutomationRout;
+    public GameObject textFeedbackPrefab;
+    public NumberFeedback numberfeedback;
 
     [System.Serializable]
     public struct EventStruct
@@ -44,6 +46,7 @@ public class SliderManager : MonoBehaviour
         sliderData.automationSlider = sliderConfig.automationSlider;
         sliderData.automated = sliderConfig.automated;
         sliderData.automatedText = sliderConfig.automatedText;
+        sliderData.textFeedbackCanvas = sliderConfig.textFeedbackCanvas;
     }
     private void Start()
     {
@@ -51,6 +54,12 @@ public class SliderManager : MonoBehaviour
         {
             StartCoroutine(RandomEventRoutine());
         }
+    }
+    public void SpawnTextFeedback()
+    {
+        GameObject textClone = Instantiate(textFeedbackPrefab, sliderData.textFeedbackCanvas);
+        Destroy(textClone, 1);
+        
     }
     public void CheckIntegrity()
     {
@@ -60,7 +69,6 @@ public class SliderManager : MonoBehaviour
             GameController.instance.GameOver();
         }
     }
-
     private IEnumerator RandomEventRoutine()
     {
 
@@ -93,7 +101,7 @@ public class SliderManager : MonoBehaviour
         {
             for (float i = 0; i < sliderData.integrityDecreaseDuration; i += Time.deltaTime)
             {
-                sliderController.DecreaseValue(ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
+                sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
             sliderData.structArray[index].routine = null;
@@ -106,7 +114,7 @@ public class SliderManager : MonoBehaviour
 
             for (; ;)
             {
-                sliderController.DecreaseValue(ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
+            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
             yield break;
@@ -149,9 +157,6 @@ public class SliderManager : MonoBehaviour
         dec = null;
         }
     }
-
-
-
     public void StopEvent(int index)
     {
         if (sliderData.structArray[index].routine != null)
@@ -161,7 +166,7 @@ public class SliderManager : MonoBehaviour
                 
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
-                sliderController.DecreaseValue(ref sliderData.structArray[index].counterSlider, 10);
+                sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 10);
 
             }
             else
@@ -170,7 +175,6 @@ public class SliderManager : MonoBehaviour
             }
         }
     }
-
     public void ExchangeResources(int index)
     {
 
@@ -181,28 +185,47 @@ public class SliderManager : MonoBehaviour
             {
                 sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value);
             }
-
             else
             {
                 sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].slider.maxValue - sliderData.structArray[index].slider.value);
             }
-
         }
         else
         {
             sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.exchangeAmount);
         }
-
     }
-
     public void IncreasResourceDirectly(int index, float amount)
     {
-        sliderController.IncreaseValue(ref sliderData.structArray[index].slider, amount);
-
+        sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Increase, ref sliderData.structArray[index].slider, amount);
+        if (sliderData.structArray[index].slider.value >= sliderData.structArray[index].slider.maxValue)
+        {
+            return;
+        }
+        if (index != 1)
+        {
+            numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Mouse, NumberFeedback.IncreaseOrDecrease.Increase);
+        }
+        else
+        {
+            numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Object, NumberFeedback.IncreaseOrDecrease.Increase);
+        }
     }
     public void DecreaseResourceDirectly(int index, float amount)
     {
-        sliderController.DecreaseValue(ref sliderData.structArray[index].slider, amount);
+        sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].slider, amount);
+        if (sliderData.structArray[index].slider.value <= sliderData.structArray[index].slider.minValue)
+        {
+            return;
+        }
+        if (index != 1)
+        {
+            numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Mouse, NumberFeedback.IncreaseOrDecrease.Decrease);
+        }
+        else
+        {
+            numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Object, NumberFeedback.IncreaseOrDecrease.Decrease);
+        }
         if (sliderData.structArray[index].slider.value <= 6)
         {
             Debug.Log("ResourceDepleted");
@@ -231,7 +254,7 @@ public class SliderManager : MonoBehaviour
         ItweenManager.instance.PunchScaleText(sliderData.automatedText);
         for (float i = sliderData.automationSlider.value; i > 0; i -= Time.deltaTime)
         {
-            sliderController.DecreaseValue(ref sliderData.automationSlider, 0.05f);
+            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.automationSlider, 0.05f);
             if (sliderData.automationSlider.value <= 2)
             {
                 sliderData.automated = false;
@@ -258,7 +281,7 @@ public class SliderManager : MonoBehaviour
         automationRout = null;
         for (float i = sliderData.automationSlider.value; i < sliderData.automationSlider.maxValue; i += Time.deltaTime)
         {
-            sliderController.IncreaseValue(ref sliderData.automationSlider, 0.02f);
+            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Increase, ref sliderData.automationSlider, 0.02f);
             if (sliderData.automationSlider.value >= sliderData.automationSlider.maxValue)
             {
                 chargeAutomationRout = null;

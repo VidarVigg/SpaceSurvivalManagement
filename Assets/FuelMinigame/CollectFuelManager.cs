@@ -26,14 +26,6 @@ public class CollectFuelManager : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-
-
-        }
-    }
     private Coroutine routine;
     public void ActivateCollectFuelMiniGame()
     {

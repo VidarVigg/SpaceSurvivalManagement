@@ -3,15 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 //flyttar siffror från ställen till andra ställen
-public class SliderController 
+public class SliderController
 {
 
-    public void IncreaseValue(ref Slider slider, float amount = 1)
+    public enum InceaseOrDecrease
     {
+
+        Increase,
+        Decrease,
+
+    }
+
+    public void ChangeResourceValues(InceaseOrDecrease type, ref Slider slider, float amount = 1)
+    {
+        switch (type)
+        {
+            case InceaseOrDecrease.Increase:
+                IncreaseValue(ref slider, amount);
+
+                break;
+            case InceaseOrDecrease.Decrease:
+                DecreaseValue(ref slider, amount);
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    void IncreaseValue(ref Slider slider, float amount = 1)
+    {
+
         slider.value += amount;
     }
 
-    public void DecreaseValue(ref Slider slider, float amount = 1)
+    void DecreaseValue(ref Slider slider, float amount = 1)
     {
         slider.value -= amount;
     }
@@ -21,6 +47,4 @@ public class SliderController
         IncreaseValue(ref increase, amt);
         DecreaseValue(ref decrease, amt + 5);
     }
-
-
 }

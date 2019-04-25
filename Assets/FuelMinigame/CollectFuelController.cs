@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class CollectFuelController
 {
 
-    public GameObject ActivateGoodButton(CollectFuelManager cfm, GameObject button, Color newColor)
+    public GameObject ActivateGoodButton( CollectFuelManager cfm, GameObject button, Color newColor)
     {
         button.GetComponent<Image>().color = newColor;
         UnityEvent click = new UnityEvent();

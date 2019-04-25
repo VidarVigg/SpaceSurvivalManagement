@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2110594658512566648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2110594658512566630}
+  - component: {fileID: 2110594658512566649}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2110594658512566630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110594658512566648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 867.8921, y: 467.5083, z: -8.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110594658512566649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110594658512566648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eeeac176879a6e448066ba752faf468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: {fileID: 0}
+  prompts:
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: Welcome to the Tutorial
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: This is the ships integrity. Your job is to keep it intact til
+      you reach your goal. To do this you must manage your resources and counter the
+      dangers of space.
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: These are the resources you have to manage. If one gets depleted
+      the ship integrity will take damage.
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: You can exchange one resource for another. Use this carefully,
+      it costs more than it yields.
+  - punch: 0
+    panel: {fileID: 0}
+    tutorialMessage: Collect fuel by pressing the orange squares, miss, and fuel will
+      decrease.
+  - punch: 0
+    panel: {fileID: 0}
+    tutorialMessage: By quickly pressing this button you will earn more oxygen.
+  - punch: 0
+    panel: {fileID: 0}
+    tutorialMessage: To collect more power enter the code and press enter.
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: This is the information panel. You will get notified on incoming
+      catastrophes that requiers you to activate countermeasures
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: These are the countermeasures that correspond to the catastrophes.
+      Resources decrease when you use these
+  - punch: 1
+    panel: {fileID: 0}
+    tutorialMessage: If you time to get more resources or just take a breather you
+      can automate the countermeasures for a short period of time.
+  - punch: 0
+    panel: {fileID: 0}
+    tutorialMessage: 'Tutorial Complete - Game will start in '
+  collectFuelManager: {fileID: 0}
+  collectO2Manager: {fileID: 0}
+  collectPowerManager: {fileID: 0}
+  sliderManager: {fileID: 0}
+  nextButton: {fileID: 0}
