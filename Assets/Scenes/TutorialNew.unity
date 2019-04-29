@@ -820,9 +820,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 009ea5f009b34b3498fbbb4b676360bb, type: 2}
-  m_sharedMaterial: {fileID: 21550641923235238, guid: 009ea5f009b34b3498fbbb4b676360bb,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1145,7 +1144,7 @@ MonoBehaviour:
     integrityDecreaseDuration: 0
     automated: 0
     exchangeAmount: 0
-    text: {fileID: 0}
+    informationText: {fileID: 0}
     automatedText: {fileID: 0}
   textFeedbackPrefab: {fileID: 0}
   numberfeedback: {fileID: 0}
@@ -8138,7 +8137,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 26ffdf63e8252c44bb876a8316159b47, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 41
     m_FontStyle: 0
     m_BestFit: 0
@@ -11619,61 +11618,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 867.8921
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 467.5083
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2110594658512566649, guid: 104a6075488dbf444bf605dd517fb553,
         type: 3}
       propertyPath: prompts.Array.data[1].panel
@@ -11784,6 +11728,67 @@ PrefabInstance:
         type: 3}
       propertyPath: prompts.Array.data[5].punch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566649, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: prompts.Array.data[7].tutorialMessage
+      value: This is the information panel. You will get notified on incoming catastrophes
+        that requires you to activate countermeasures
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 867.8921
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 467.5083
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566630, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 104a6075488dbf444bf605dd517fb553, type: 3}
@@ -14381,7 +14386,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 183078398}
   m_HandleRect: {fileID: 0}

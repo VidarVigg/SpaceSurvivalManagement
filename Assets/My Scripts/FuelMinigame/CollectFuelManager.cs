@@ -67,6 +67,11 @@ public class CollectFuelManager : MonoBehaviour
         yield return null;
         yield break;
     }
+
+    public void StartFuelMinigame()
+    {
+
+    }
     public void NullAllButtons()
     {
         for (int i = 0; i < collectFuelData.buttons.Length; i++)

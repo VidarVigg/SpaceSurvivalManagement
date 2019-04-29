@@ -9,11 +9,4 @@ public class CollectO2Controller
     {
         O2Slider.value += o2Config.increaseAmount;
     }
-    public IEnumerator DecreaseValue()
-    {
-         
-        yield break;
-    }
-
-
 }

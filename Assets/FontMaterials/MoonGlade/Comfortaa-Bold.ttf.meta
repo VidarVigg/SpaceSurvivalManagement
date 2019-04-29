@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26ffdf63e8252c44bb876a8316159b47
+guid: 850235c62e48c304c88eb552814847b5
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,10 +8,11 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: DJB Get Digital
+  fontName: Comfortaa
   fontNames:
-  - DJB Get Digital
-  fallbackFontReferences: []
+  - Comfortaa
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4bf2bd3d8926f2940b2c50f65c9fa9d6, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
