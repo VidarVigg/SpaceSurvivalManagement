@@ -64,7 +64,7 @@ public class SliderManager : MonoBehaviour
     }
     public void CheckIntegrity()
     {
-        if (sliderData.integritySlider.value <= 1 /*sliderConfig.integrityLoseAmt*/)
+        if (sliderData.integritySlider.value == sliderData.integritySlider.minValue)
         {
             //sliderData.text.text = GameController.instance.GameOver();
             GameController.instance.GameOver();

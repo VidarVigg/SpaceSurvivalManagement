@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Canvas loseCanvas;
     [SerializeField] Canvas winCanvas;
     public static GameController instance;
+
     
 
     private void Awake()
@@ -24,17 +25,24 @@ public class GameController : MonoBehaviour
         }
 
     }
-    
+    private void Start()
+    {
+        AudioManager.instance.PlayLoop(AudioManager.EventType.EngineSound);
+    }
     public void GameOver()
     {
-
+        Debug.Log("GameOver");
+        AudioManager.instance.StopLoop(AudioManager.EventType.EngineSound);
         loseCanvas.enabled = true;
 
     }
 
     public void Win()
     {
+        Debug.Log("Win");
         winCanvas.enabled = true;
+        AudioManager.instance.StopLoop(AudioManager.EventType.EngineSound);
+
     }
     public void RestartGame()
     {

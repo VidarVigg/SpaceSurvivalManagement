@@ -66,6 +66,7 @@ public class CollectO2Manager : MonoBehaviour
 
     public void ActivateO2Minigame()
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (minigameActivated == true)
         {
           DeactivateO2Minigame();
