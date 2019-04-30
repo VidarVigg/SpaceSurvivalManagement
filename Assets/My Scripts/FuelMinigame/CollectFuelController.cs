@@ -9,27 +9,37 @@ public class CollectFuelController
     {
         button.GetComponent<Image>().color = newColor;
         UnityEvent click = new UnityEvent();
-        click.AddListener(() => cfm.test.IncreasResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt)); // make enum great again
+        click.AddListener(() => cfm.sliderManager.IncreasResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt)); // make enum great again
         click.AddListener(() => cfm.NullClickedButton(button));
+        click.AddListener(() => AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback));
         button.GetComponent<CustomButton>().leftClick = click;
         return button;
     }
 
     public GameObject ActivateBadButton(GameObject button, CollectFuelManager cfm)
     {
-        UnityEvent badButton = new UnityEvent();
-        badButton.AddListener(() => cfm.test.DecreaseResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt));
-        button.GetComponent<CustomButton>().leftClick = badButton;
-        return button;
+        if (button != null)
+        {
+            UnityEvent badButton = new UnityEvent();
+            badButton.AddListener(() => cfm.sliderManager.DecreaseResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt));
+            button.GetComponent<CustomButton>().leftClick = badButton;
+            return button;
+        }
+        return null;
+
     }
 
     public GameObject DeactivateButton(GameObject button, Color defaultcolor)
     {
-        button.GetComponent<Image>().color = defaultcolor;
         UnityEvent rinse = new UnityEvent();
 
-        button.GetComponent<CustomButton>().leftClick = rinse;
-        return button;
+        if (button != null)
+        {
+            button.GetComponent<CustomButton>().leftClick = rinse;
+            button.GetComponent<Image>().color = defaultcolor;
+            return button;
+        }
+        return null;
     }
     
 }

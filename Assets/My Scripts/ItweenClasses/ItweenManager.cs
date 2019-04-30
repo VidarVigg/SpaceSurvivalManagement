@@ -48,15 +48,17 @@ public class ItweenManager : MonoBehaviour
     
     public void ItweenMoveTo(int index)
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.PanelAcivated);
         iTween.MoveTo(itweenElements[index].itemToTween, iTween.Hash("position", itweenElements[index].endPos, "time", 1, "easetype", itweenElements[index].easeType));
     }
     public void ItweenMoveBack(int index)
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.PanelDeactivated);
         iTween.MoveTo(itweenElements[index].itemToTween, iTween.Hash("position", itweenElements[index].startPos, "time", 1, "easetype", itweenElements[index].easeType));
     }
-    public void PunchScaleSlider(Slider slider)
+    public void PunchScaleSlider(Slider slider, float speed = 0.3f)
     {
-        iTween.PunchScale(slider.gameObject, Vector3.one, 0.3f);
+        iTween.PunchScale(slider.gameObject, Vector3.one, speed);
     }
     public void PunchScaleText(TextMeshProUGUI text, float time = 0.3f)
     {

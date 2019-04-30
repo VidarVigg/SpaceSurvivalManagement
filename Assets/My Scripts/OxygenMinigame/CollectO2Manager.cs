@@ -23,29 +23,36 @@ public class CollectO2Manager : MonoBehaviour
     {
 
         collectO2Controller.IncreaseO2Value(ref collectO2Config.o2Slider, collectO2Config);
-        if (collectO2Config.o2Slider.value >= 40 && goal1 == false)
+        if (sliderManager.sliderData.structArray[2].slider.value == sliderManager.sliderData.structArray[2].slider.maxValue)
+        {
+            return;
+        }
+
+        if (collectO2Config.o2Slider.value >= 30 && goal1 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-
             goal1 = true;
+
+            Debug.Log("1");
         }
-        if (collectO2Config.o2Slider.value >= 60 && goal2 == false)
+        if (collectO2Config.o2Slider.value >= 50 && goal2 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-
             goal2 = true;
+
+            Debug.Log("2");
         }
-        if (collectO2Config.o2Slider.value >= 80 && goal3 == false)
+        if (collectO2Config.o2Slider.value >= 70 && goal3 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-
             goal3 = true;
+            Debug.Log("3");
         }
-        if (collectO2Config.o2Slider.value >= 99 && goal4 == false)
+        if (collectO2Config.o2Slider.value >= 90 && goal4 == false)
         {
             sliderManager.IncreasResourceDirectly(2, 10);
-
             goal4 = true;
+            Debug.Log("4");
         }
     }
 

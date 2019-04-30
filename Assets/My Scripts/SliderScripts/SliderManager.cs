@@ -12,6 +12,7 @@ public class SliderManager : MonoBehaviour
     public SliderData sliderData = new SliderData();
     public Coroutine automationRout;
     public Coroutine chargeAutomationRout;
+
     private Coroutine decreaseintegrityDueToLackOfResources;
     public GameObject textFeedbackPrefab;
     public NumberFeedback numberfeedback;
@@ -80,6 +81,7 @@ public class SliderManager : MonoBehaviour
             ItweenManager.instance.ItweenMoveTo(4);
             yield return new WaitForSeconds(0.5f);
             ItweenManager.instance.ItweenMoveTo(3);
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.Warning);
             for (float i = 5; i > 0; i -= Time.deltaTime)
             {
                 sliderData.informationText.text = "INCOMING " + sliderData.structArray[random].message + " IN " + i.ToString("0.0");
@@ -89,7 +91,9 @@ public class SliderManager : MonoBehaviour
             ItweenManager.instance.ItweenMoveTo(5);
             sliderData.informationText.text = sliderData.structArray[random].message;
             ItweenManager.instance.PunchScaleText(sliderData.informationText, 3);
+
             sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
+
             yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
             sliderData.informationText.text = null;
             ItweenManager.instance.ItweenMoveBack(3);
@@ -103,16 +107,25 @@ public class SliderManager : MonoBehaviour
     {
         if (sliderData.automated == false)
         {
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.Alarm);
+
             yield return new WaitForSeconds(1);
+
+            AudioManager.instance.PlayLoop(AudioManager.EventType.ShipIntegrityDamage);
             ItweenManager.instance.ScreenShaking();
+
             for (float i = 0; i < sliderData.integrityDecreaseDuration; i += Time.deltaTime)
             {
                 ItweenManager.instance.ScreenShaking();
+
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
 
+
+            AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
             sliderData.structArray[index].routine = null;
+
             yield break;
         }
 
@@ -122,7 +135,7 @@ public class SliderManager : MonoBehaviour
 
         for (; ; )
         {
-            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
+            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, 1 * Time.deltaTime);
             yield return null;
         }
 
@@ -130,11 +143,12 @@ public class SliderManager : MonoBehaviour
     }
     public void DecreaseIntegrityDueToLackOfResources(Slider slider)
     {
+
         if (slider.value < 10)
         {
             if (decreaseintegrityDueToLackOfResources == null)
             {
-
+                //ItweenManager.instance.PunchScaleSlider(slider, 5);
                 decreaseintegrityDueToLackOfResources = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine()); //if not already active
             }
         }
@@ -161,6 +175,7 @@ public class SliderManager : MonoBehaviour
             StopCoroutine(decreaseintegrityDueToLackOfResources);
 
             decreaseintegrityDueToLackOfResources = null;
+
         }
     }
     public void StopEvent(int index)
@@ -169,10 +184,10 @@ public class SliderManager : MonoBehaviour
         {
             if (sliderData.structArray[index].counterSlider.value >= 10)
             {
-
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 30);
+                AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
 
             }
             else
@@ -190,6 +205,7 @@ public class SliderManager : MonoBehaviour
             if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount)
             {
                 sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value );
+
             }
             else if (sliderData.structArray[index].slider.value == sliderData.structArray[index].slider.maxValue)
             {
@@ -198,47 +214,56 @@ public class SliderManager : MonoBehaviour
             else
             {
                 sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].slider.maxValue - sliderData.structArray[index].slider.value );
+                ItweenManager.instance.PunchScaleSlider(sliderData.structArray[index].slider);
             }
         }
         else
         {
             sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.exchangeAmount);
+            ItweenManager.instance.PunchScaleSlider(sliderData.structArray[index].slider);
         }
     }
     public void IncreasResourceDirectly(int index, float amount)
     {
         sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Increase, ref sliderData.structArray[index].slider, amount);
-        if (sliderData.structArray[index].slider.value >= sliderData.structArray[index].slider.maxValue)
-        {
-            return;
-        }
+
         if (index != 1)
         {
             numberfeedback?.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Mouse, NumberFeedback.IncreaseOrDecrease.Increase);
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback);
         }
         else
         {
             numberfeedback?.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Object, NumberFeedback.IncreaseOrDecrease.Increase);
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback);
         }
-    }
-    public void DecreaseResourceDirectly(int index, float amount)
-    {
-        sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].slider, amount);
-        if (sliderData.structArray[index].slider.value <= sliderData.structArray[index].slider.minValue)
+        if (sliderData.structArray[index].slider.value >= sliderData.structArray[index].slider.maxValue)
         {
             return;
         }
+    }
+
+    public void DecreaseResourceDirectly(int index, float amount)
+    {
+        sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].slider, amount);
+
         if (index != 1)
         {
             numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Mouse, NumberFeedback.IncreaseOrDecrease.Decrease);
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedbackBad);
         }
         else
         {
             numberfeedback.SpawnText(amount, NumberFeedback.SpawnAtMouseOrObject.Object, NumberFeedback.IncreaseOrDecrease.Decrease);
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedbackBad);
         }
         if (sliderData.structArray[index].slider.value <= 6)
         {
             Debug.Log("ResourceDepleted");
+        }
+        if (sliderData.structArray[index].slider.value <= sliderData.structArray[index].slider.minValue)
+        {
+            return;
         }
     }
     public void ActivateCounterMeasureAutomation()

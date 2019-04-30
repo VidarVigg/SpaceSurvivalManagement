@@ -7,7 +7,10 @@ public class CollectFuelManager : MonoBehaviour
     public CollectFuelConfig collectFuelConfig = new CollectFuelConfig();
     public CollectFuelController collectFuelController = new CollectFuelController();
     public CollectFuelData collectFuelData = new CollectFuelData();
-    public SliderManager test = new SliderManager();
+    public SliderManager sliderManager = new SliderManager();
+    public bool fuelMinigameActivated;
+    private Coroutine spawnButtons;
+    private Coroutine spawnGoodButton;
     public enum ResourceType
     {
         Fuel, 
@@ -26,15 +29,16 @@ public class CollectFuelManager : MonoBehaviour
 
     }
 
-    private Coroutine routine;
     public void ActivateCollectFuelMiniGame()
     {
-        //collectFuelData.collectFuelCanvas.enabled = true;
-            ItweenManager.instance.ItweenMoveTo(0);
-        if (routine == null)
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
+        if (fuelMinigameActivated == false)
         {
-            routine = StartCoroutine(SpawnButtonsRoutine());
-
+            StartFuelMinigame();
+        }
+        else
+        {
+            DeactivateFuelMinigame();
         }
     }
     private IEnumerator SpawnButtonsRoutine()
@@ -45,7 +49,7 @@ public class CollectFuelManager : MonoBehaviour
             collectFuelController.ActivateBadButton(buttonClone, this);
             yield return new WaitForSeconds(0.005f);
         }
-        StartCoroutine(EventifyRandomButton());
+        spawnGoodButton = StartCoroutine(EventifyRandomButton());
         yield break;
     }
     private IEnumerator EventifyRandomButton()
@@ -57,13 +61,12 @@ public class CollectFuelManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             collectFuelController.DeactivateButton(collectFuelData.buttons[rand], collectFuelData.defaultColor);
             collectFuelController.ActivateBadButton(collectFuelData.buttons[rand], this);
-
+            
         }
         yield return new WaitForSeconds(1);
         //collectFuelData.collectFuelCanvas.enabled = false;
-        ItweenManager.instance.ItweenMoveBack(0);
-        NullAllButtons();
-        routine = null;
+        DeactivateFuelMinigame();
+        spawnButtons = null;
         yield return null;
         yield break;
     }
@@ -71,6 +74,33 @@ public class CollectFuelManager : MonoBehaviour
     public void StartFuelMinigame()
     {
 
+        fuelMinigameActivated = true;
+        //collectFuelData.collectFuelCanvas.enabled = true;
+        ItweenManager.instance.ItweenMoveTo(0);
+        if (spawnButtons == null)
+        {
+            spawnButtons = StartCoroutine(SpawnButtonsRoutine());
+
+        }
+    }
+    public void DeactivateFuelMinigame()
+    {
+        if (spawnButtons != null)
+        {
+            StopCoroutine(spawnButtons);
+
+        }
+
+        if (spawnGoodButton != null)
+        {
+            StopCoroutine(spawnGoodButton);
+        }
+        
+        spawnButtons = null;
+        spawnGoodButton = null;
+        fuelMinigameActivated = false;
+        ItweenManager.instance.ItweenMoveBack(0);
+        NullAllButtons();
     }
     public void NullAllButtons()
     {

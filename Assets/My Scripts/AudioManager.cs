@@ -12,6 +12,13 @@ public class AudioManager : MonoBehaviour
     {
         ButtonSound,
         EngineSound,
+        ShipIntegrityDamage,
+        Warning,
+        Alarm,
+        PanelAcivated,
+        PanelDeactivated,
+        NumberFeedback,
+        NumberFeedbackBad,
 
     }
     private Dictionary<EventType, SoundEventStruct> dictionary = new Dictionary<EventType, SoundEventStruct>();

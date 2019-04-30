@@ -30,6 +30,7 @@ public class CollectPowerManager : MonoBehaviour
         collectPowerConfig.rightOrWrong.color = new Color(0, 255, 0);
         rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.right, inputField));
         sliderManager.IncreasResourceDirectly(1, 10f);
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback);
 
 
     }
@@ -79,6 +80,7 @@ public class CollectPowerManager : MonoBehaviour
     }
     public void ActivateCollectPowerGame()
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (powerMinigameActivated == true)
         {
             DeactivateCollectPowerGame();
@@ -86,6 +88,7 @@ public class CollectPowerManager : MonoBehaviour
         else
         {
             StartCollectPowerMinigame();
+
         }
     }
     public void StartCollectPowerMinigame()
