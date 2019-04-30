@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
         PanelDeactivated,
         NumberFeedback,
         NumberFeedbackBad,
+        Evasion,
+        CounterMeasuresAutomated,
 
     }
     private Dictionary<EventType, SoundEventStruct> dictionary = new Dictionary<EventType, SoundEventStruct>();

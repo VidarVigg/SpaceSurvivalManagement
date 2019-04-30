@@ -21,7 +21,7 @@ public class CollectO2Manager : MonoBehaviour
     }
     public void IncreaseO2ValueOnButtonPress()
     {
-
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         collectO2Controller.IncreaseO2Value(ref collectO2Config.o2Slider, collectO2Config);
         if (sliderManager.sliderData.structArray[2].slider.value == sliderManager.sliderData.structArray[2].slider.maxValue)
         {

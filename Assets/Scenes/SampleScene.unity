@@ -2776,6 +2776,12 @@ MonoBehaviour:
     - type: 8
       sound: event:/FailedResourceCollect
       duration: 5
+    - type: 9
+      sound: event:/Evasion
+      duration: 10
+    - type: 10
+      sound: event:/AutomatedCountermeasures
+      duration: 20
 --- !u!4 &396349484
 Transform:
   m_ObjectHideFlags: 0
@@ -2819,35 +2825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  m_Name: 
-  sharedProfile: {fileID: 11400000, guid: 47804f27de156b945bc6ed1f0b64b392, type: 2}
-  isGlobal: 0
-  blendDistance: 0
-  weight: 1
-  priority: 0
-  m_PreviousLayer: 0
-  m_PreviousPriority: 0
-  m_TempColliders: []
-  m_InternalProfile: {fileID: 0}
 --- !u!4 &475188243
 Transform:
   m_ObjectHideFlags: 0

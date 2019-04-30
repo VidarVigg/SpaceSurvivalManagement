@@ -180,6 +180,7 @@ public class SliderManager : MonoBehaviour
     }
     public void StopEvent(int index)
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (sliderData.structArray[index].routine != null)
         {
             if (sliderData.structArray[index].counterSlider.value >= 10)
@@ -188,6 +189,7 @@ public class SliderManager : MonoBehaviour
                 sliderData.structArray[index].routine = null;
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 30);
                 AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
+                AudioManager.instance.PlayOneShot(AudioManager.EventType.Evasion);
 
             }
             else
@@ -198,7 +200,7 @@ public class SliderManager : MonoBehaviour
     }
     public void ExchangeResources(int index)
     {
-
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount || sliderData.structArray[index].slider.value + sliderData.exchangeAmount > sliderData.structArray[index].slider.maxValue)
         {
 
@@ -268,6 +270,7 @@ public class SliderManager : MonoBehaviour
     }
     public void ActivateCounterMeasureAutomation()
     {
+        AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (chargeAutomationRout != null)
         {
             return;
@@ -281,6 +284,7 @@ public class SliderManager : MonoBehaviour
         }
         if (automationRout == null)
         {
+            AudioManager.instance.PlayLoop(AudioManager.EventType.CounterMeasuresAutomated);
             automationRout = StartCoroutine(CounterMesureAutomationRoutine());
         }
 
@@ -303,7 +307,7 @@ public class SliderManager : MonoBehaviour
                 automationRout = null;
                 if (chargeAutomationRout == null)
                 {
-
+                    AudioManager.instance.StopLoop(AudioManager.EventType.CounterMeasuresAutomated);
                     chargeAutomationRout = StartCoroutine(ChargeCounterMeasureAutomationRoutine());
                 }
                 yield return null;
