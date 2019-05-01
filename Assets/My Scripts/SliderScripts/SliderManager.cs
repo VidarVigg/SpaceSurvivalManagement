@@ -12,6 +12,7 @@ public class SliderManager : MonoBehaviour
     public SliderData sliderData = new SliderData();
     public Coroutine automationRout;
     public Coroutine chargeAutomationRout;
+    public Coroutine randomEventRoutine;
 
     private Coroutine decreaseintegrityDueToLackOfResources;
     public GameObject textFeedbackPrefab;
@@ -54,7 +55,7 @@ public class SliderManager : MonoBehaviour
     {
         if (!TutorialController.instance)
         {
-            StartCoroutine(RandomEventRoutine());
+           randomEventRoutine = StartCoroutine(RandomEventRoutine());
         }
     }
     public void SpawnTextFeedback()
@@ -91,9 +92,7 @@ public class SliderManager : MonoBehaviour
             ItweenManager.instance.ItweenMoveTo(5);
             sliderData.informationText.text = sliderData.structArray[random].message;
             ItweenManager.instance.PunchScaleText(sliderData.informationText, 3);
-
             sliderData.structArray[random].routine = StartCoroutine(EventCoroutine(random));
-
             yield return new WaitUntil(() => sliderData.structArray[random].routine == null);
             sliderData.informationText.text = null;
             ItweenManager.instance.ItweenMoveBack(3);
@@ -183,18 +182,32 @@ public class SliderManager : MonoBehaviour
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
         if (sliderData.structArray[index].routine != null)
         {
-            if (sliderData.structArray[index].counterSlider.value >= 10)
+            if (sliderData.structArray[index].counterSlider.value >= 30)
             {
+                switch (index)
+                {
+                    case 0:
+                        AudioManager.instance.PlayOneShot(AudioManager.EventType.Shields);
+                        break;
+                    case 1:
+                        AudioManager.instance.PlayOneShot(AudioManager.EventType.DrainOxygen);
+                        break;
+                    case 2:
+                        AudioManager.instance.PlayOneShot(AudioManager.EventType.Evasion);
+                        break;
+                }
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 30);
                 AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
-                AudioManager.instance.PlayOneShot(AudioManager.EventType.Evasion);
+
 
             }
             else
             {
                 sliderData.informationText.text = "INSUFFICIENT RESOURCE";
+                AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedbackBad);
+                return;
             }
         }
     }
@@ -206,7 +219,7 @@ public class SliderManager : MonoBehaviour
 
             if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount)
             {
-                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value );
+                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value);
 
             }
             else if (sliderData.structArray[index].slider.value == sliderData.structArray[index].slider.maxValue)
@@ -215,7 +228,7 @@ public class SliderManager : MonoBehaviour
             }
             else
             {
-                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].slider.maxValue - sliderData.structArray[index].slider.value );
+                sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].slider.maxValue - sliderData.structArray[index].slider.value);
                 ItweenManager.instance.PunchScaleSlider(sliderData.structArray[index].slider);
             }
         }

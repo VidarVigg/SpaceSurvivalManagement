@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] Canvas loseCanvas;
     [SerializeField] Canvas winCanvas;
+    public SliderManager sliderManager;
     public static GameController instance;
 
     
@@ -32,7 +33,9 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GameOver");
-        AudioManager.instance.StopLoop(AudioManager.EventType.EngineSound);
+        AudioManager.instance.StopLoops(AudioManager.EventType.EngineSound);
+        AudioManager.instance.StopLoops(AudioManager.EventType.CounterMeasuresAutomated);
+        StopCoroutine(sliderManager.randomEventRoutine);
         loseCanvas.enabled = true;
 
     }
@@ -41,7 +44,9 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Win");
         winCanvas.enabled = true;
-        AudioManager.instance.StopLoop(AudioManager.EventType.EngineSound);
+        AudioManager.instance.StopLoops(AudioManager.EventType.EngineSound);
+        AudioManager.instance.StopLoops(AudioManager.EventType.CounterMeasuresAutomated);
+        StopCoroutine(sliderManager.randomEventRoutine);
 
     }
     public void RestartGame()

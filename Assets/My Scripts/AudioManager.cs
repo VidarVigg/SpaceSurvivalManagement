@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
         NumberFeedbackBad,
         Evasion,
         CounterMeasuresAutomated,
+        DrainOxygen,
+        Shields,
 
     }
     private Dictionary<EventType, SoundEventStruct> dictionary = new Dictionary<EventType, SoundEventStruct>();

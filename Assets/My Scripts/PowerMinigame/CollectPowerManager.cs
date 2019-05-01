@@ -19,12 +19,14 @@ public class CollectPowerManager : MonoBehaviour
         {
             collectPowerConfig.rightOrWrong.color = new Color(255, 0, 0);
             rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.wrong, inputField));
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedbackBad);
             return;
         }
         if (inputField.text != collectPowerData.combination)
         {
             collectPowerConfig.rightOrWrong.color = new Color(255, 0, 0);
             rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.wrong, inputField));
+            AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedbackBad);
             return;
         }
         collectPowerConfig.rightOrWrong.color = new Color(0, 255, 0);
