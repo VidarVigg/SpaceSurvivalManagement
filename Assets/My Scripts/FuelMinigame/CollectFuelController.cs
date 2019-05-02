@@ -9,9 +9,12 @@ public class CollectFuelController
     {
         button.GetComponent<Image>().color = newColor;
         UnityEvent click = new UnityEvent();
-        click.AddListener(() => cfm.sliderManager.IncreasResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt)); // make enum great again
+        if (cfm.sliderManager.sliderData.structArray[0].slider.value != cfm.sliderManager.sliderData.structArray[0].slider.maxValue)
+        {
+            click.AddListener(() => AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback));
+            click.AddListener(() => cfm.sliderManager.IncreasResourceDirectly((int)cfm.collectFuelConfig.resourceType, cfm.collectFuelConfig.increaseAmt)); // make enum great again
+        }
         click.AddListener(() => cfm.NullClickedButton(button));
-        click.AddListener(() => AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback));
         button.GetComponent<CustomButton>().leftClick = click;
         return button;
     }

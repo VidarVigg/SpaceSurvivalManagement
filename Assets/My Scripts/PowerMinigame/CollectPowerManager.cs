@@ -11,6 +11,7 @@ public class CollectPowerManager : MonoBehaviour
     [SerializeField] SliderManager sliderManager = new SliderManager();
     private Coroutine rightOrWrongMessageRoutine;
     bool powerMinigameActivated;
+    bool submitted;
 
     public void CompareTexts(InputField inputField)
     {
@@ -65,7 +66,15 @@ public class CollectPowerManager : MonoBehaviour
 
     public void Submit(InputField inputField)
     {
-        CompareTexts(inputField);
+        if (submitted == false)
+        {
+            submitted = true;
+            CompareTexts(inputField);
+
+        }
+
+
+
     }
 
     public void IncreaseNumberOfIterations()
@@ -95,6 +104,7 @@ public class CollectPowerManager : MonoBehaviour
     }
     public void StartCollectPowerMinigame()
     {
+        submitted = false;
         powerMinigameActivated = true;
         ItweenManager.instance.ItweenMoveTo(2);
         //collectPowerConfig.collectPowerCanvas.enabled = true;
@@ -109,6 +119,7 @@ public class CollectPowerManager : MonoBehaviour
     }
     public void GenerateNewCode()
     {
+        submitted = false;
         collectPowerController.GenerateAndApply(ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
 
     }
