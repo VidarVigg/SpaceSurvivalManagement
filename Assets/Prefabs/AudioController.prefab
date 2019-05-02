@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8063286441128635210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8063286441128635212}
+  - component: {fileID: 8063286441128635211}
+  m_Layer: 0
+  m_Name: AudioController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8063286441128635212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063286441128635210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 909.252, y: 573.1676, z: 3.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8063286441128635211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063286441128635210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ac9be8c7e50124baed03de006da4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioConfig:
+    soundEventStructs:
+    - type: 0
+      sound: event:/ButtonSound
+      duration: 0.1
+    - type: 1
+      sound: event:/engineSound
+      duration: 0
+    - type: 2
+      sound: event:/ShipIntegrityDamage
+      duration: 0
+    - type: 3
+      sound: event:/Warning
+      duration: 2
+    - type: 4
+      sound: event:/Alarm
+      duration: 2
+    - type: 5
+      sound: event:/PanelActivation
+      duration: 0.5
+    - type: 7
+      sound: event:/ResourceIncreaseFeedback
+      duration: 0.5
+    - type: 6
+      sound: event:/PanelDeactivation
+      duration: 0.5
+    - type: 8
+      sound: event:/FailedResourceCollect
+      duration: 5
+    - type: 9
+      sound: event:/Evasion
+      duration: 10
+    - type: 10
+      sound: event:/AutomatedCountermeasures
+      duration: 20
+    - type: 11
+      sound: event:/DrainOxygen
+      duration: 10
+    - type: 12
+      sound: event:/Shield
+      duration: 10
+    - type: 13
+      sound: event:/DuckAll
+      duration: 0

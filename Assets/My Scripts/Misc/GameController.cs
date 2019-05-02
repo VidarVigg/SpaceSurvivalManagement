@@ -42,7 +42,8 @@ public class GameController : MonoBehaviour
 
 
                 pauseMenuActive = true;
-                pauseCanvas.enabled = true;
+            Debug.Log("Pauawrqefwfsed");
+            pauseCanvas.enabled = true;
                 Time.timeScale = 0;
                 Debug.Log("Paused");
                 AudioManager.instance.PlayLoop(AudioManager.EventType.MuteAll);
@@ -54,24 +55,28 @@ public class GameController : MonoBehaviour
     }
     public void Resume()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         pauseCanvas.enabled = false;
         Time.timeScale = 1;
         AudioManager.instance.TryStopLoop(AudioManager.EventType.MuteAll);
     }
     public void StartGame()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         SceneManager.LoadScene("SampleScene");
         Time.timeScale = 1;
     }
 
     public void StartTutorial()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         SceneManager.LoadScene("TutorialTest");
         Time.timeScale = 1;
         AudioManager.instance.TryStopLoop(AudioManager.EventType.MuteAll);
     }
     public void Restart()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         SceneManager.LoadScene("SampleScene");
         Time.timeScale = 1;
         AudioManager.instance.TryStopLoop(AudioManager.EventType.MuteAll);
@@ -81,12 +86,14 @@ public class GameController : MonoBehaviour
     }
     public void GoToMainMenu()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
         AudioManager.instance.TryStopLoop(AudioManager.EventType.MuteAll);
     }
     public void QuitGame()
     {
+        AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         Application.Quit();
     }
     public void GameOver()
