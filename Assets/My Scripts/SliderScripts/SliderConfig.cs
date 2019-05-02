@@ -17,5 +17,7 @@ public class SliderConfig
     public int exchangeAmount;
     public TextMeshProUGUI informationText;
     public TextMeshProUGUI automatedText;
+    public TextMeshProUGUI integrityText;
     public float integrityLoseAmt;
+
 }

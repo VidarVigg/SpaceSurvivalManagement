@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
         CounterMeasuresAutomated,
         DrainOxygen,
         Shields,
+        MuteAll,
 
     }
     private Dictionary<EventType, SoundEventStruct> dictionary = new Dictionary<EventType, SoundEventStruct>();
@@ -92,7 +93,7 @@ public class AudioManager : MonoBehaviour
         FMOD.Studio.EventInstance eventInstance = dictionary[soundType].soundEv;
         eventInstance.start();
         dictionary[soundType].eventQueue.Enqueue(eventInstance);
-        
+
     }
     public void StopLoop(EventType soundType, FMOD.Studio.STOP_MODE stopMode = FMOD.Studio.STOP_MODE.ALLOWFADEOUT)
     {
@@ -105,6 +106,21 @@ public class AudioManager : MonoBehaviour
         {
             StopLoop(soundType, stopMode);
         }
+    }
+    public void TryStopLoop(EventType soundType, FMOD.Studio.STOP_MODE stopMode = FMOD.Studio.STOP_MODE.ALLOWFADEOUT)
+    {
+
+        try
+        {
+            FMOD.Studio.EventInstance eventInstance = dictionary[soundType].eventQueue.Dequeue();
+            eventInstance.stop(stopMode);
+        }
+        catch
+        {
+
+        }
+
+
     }
 
 

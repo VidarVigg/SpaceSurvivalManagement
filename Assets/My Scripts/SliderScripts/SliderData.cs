@@ -18,5 +18,6 @@ public class SliderData
     public int exchangeAmount;
     public TextMeshProUGUI informationText;
     public TextMeshProUGUI automatedText;
+    public TextMeshProUGUI integrityText;
 }
 

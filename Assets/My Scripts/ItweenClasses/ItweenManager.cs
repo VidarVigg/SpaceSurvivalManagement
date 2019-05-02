@@ -40,10 +40,10 @@ public class ItweenManager : MonoBehaviour
     }
     private void Update()
     {
-        for (int i = 0; i < itweenElements.Length; i++)
-        {
-            itweenElements[i].currentPos = itweenElements[i].itemToTween.GetComponent<RectTransform>().position;
-        }
+        //for (int i = 0; i < itweenElements.Length; i++)
+        //{
+        //    itweenElements[i].currentPos = itweenElements[i].itemToTween.GetComponent<RectTransform>().position;
+        //}
     }
     
     public void ItweenMoveTo(int index)

@@ -1129,6 +1129,7 @@ MonoBehaviour:
     exchangeAmount: 10
     informationText: {fileID: 1854873214}
     automatedText: {fileID: 761047470}
+    integrityText: {fileID: 0}
     integrityLoseAmt: 0
   sliderData:
     structArray: []
@@ -1142,6 +1143,7 @@ MonoBehaviour:
     exchangeAmount: 0
     informationText: {fileID: 0}
     automatedText: {fileID: 0}
+    integrityText: {fileID: 0}
   textFeedbackPrefab: {fileID: 1500315691}
   numberfeedback: {fileID: 1226539645}
 --- !u!4 &105419064
@@ -3256,6 +3258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: prompts.Array.data[10].tutorialMessage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110594658512566649, guid: 104a6075488dbf444bf605dd517fb553,
+        type: 3}
+      propertyPath: prompts.Array.data[6].tutorialMessage
+      value: To collect more power enter the code and press SUBMIT.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 104a6075488dbf444bf605dd517fb553, type: 3}
@@ -11505,7 +11512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itweenElements:
   - itemToTween: {fileID: 1841199254}
-    currentPos: {x: 32.787537, y: 297, z: 0}
+    currentPos: {x: -244, y: 297, z: 0}
     startPos: {x: -244, y: 297, z: 0}
     endPos: {x: 240, y: 297, z: 0}
     easeType: 31
@@ -11533,6 +11540,11 @@ MonoBehaviour:
     currentPos: {x: 1536, y: 1240, z: 0}
     startPos: {x: 1536, y: 1240, z: 0}
     endPos: {x: 1536, y: 945, z: 0}
+    easeType: 31
+  - itemToTween: {fileID: 0}
+    currentPos: {x: 2174.9, y: 620.35, z: 0}
+    startPos: {x: 2175, y: 620.25, z: 0}
+    endPos: {x: 960, y: 620.25, z: 0}
     easeType: 31
   - itemToTween: {fileID: 522230116}
     currentPos: {x: 2174.9, y: 620.35, z: 0}
@@ -14830,6 +14842,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialTextPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c270ef72e7379c4ca4a90aa2a5db74d,
+        type: 2}
+    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21278817390512146, guid: 6c270ef72e7379c4ca4a90aa2a5db74d,
+        type: 2}
     - target: {fileID: 6622433636221669700, guid: c41d040366a3dae4f97e25250a2e8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14945,28 +14979,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TutorialProgressFwd
       objectReference: {fileID: 0}
-    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 6c270ef72e7379c4ca4a90aa2a5db74d,
-        type: 2}
-    - target: {fileID: 6622433636626431161, guid: c41d040366a3dae4f97e25250a2e8d8c,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 21278817390512146, guid: 6c270ef72e7379c4ca4a90aa2a5db74d,
-        type: 2}
     - target: {fileID: 6622433637950656531, guid: c41d040366a3dae4f97e25250a2e8d8c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -17312,6 +17324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loseCanvas: {fileID: 265255656}
   winCanvas: {fileID: 849805618}
+  sliderManager: {fileID: 105419063}
 --- !u!4 &2119026069
 Transform:
   m_ObjectHideFlags: 0
@@ -17448,6 +17461,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 534669904}
+    - target: {fileID: 4944830623341223836, guid: 6ededfaf260072749a17172590e6ab8f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4944830623376745539, guid: 6ededfaf260072749a17172590e6ab8f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

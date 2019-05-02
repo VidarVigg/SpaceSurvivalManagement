@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class SliderManager : MonoBehaviour
 {
 
+    public const int LACK_OF_RESOURCE_MESSAGE = 6;
+
     public SliderConfig sliderConfig = new SliderConfig();
     public SliderController sliderController = new SliderController();
     public SliderData sliderData = new SliderData();
@@ -50,12 +52,13 @@ public class SliderManager : MonoBehaviour
         sliderData.automated = sliderConfig.automated;
         sliderData.automatedText = sliderConfig.automatedText;
         sliderData.textFeedbackCanvas = sliderConfig.textFeedbackCanvas;
+        sliderData.integrityText = sliderConfig.integrityText;
     }
     private void Start()
     {
         if (!TutorialController.instance)
         {
-           randomEventRoutine = StartCoroutine(RandomEventRoutine());
+            randomEventRoutine = StartCoroutine(RandomEventRoutine());
         }
     }
     public void SpawnTextFeedback()
@@ -70,9 +73,10 @@ public class SliderManager : MonoBehaviour
         {
             //sliderData.text.text = GameController.instance.GameOver();
             GameController.instance.GameOver();
+            StopCoroutine(randomEventRoutine);
         }
     }
-    private IEnumerator RandomEventRoutine()
+    public IEnumerator RandomEventRoutine()
     {
         while (true)
         {
@@ -134,7 +138,7 @@ public class SliderManager : MonoBehaviour
 
         for (; ; )
         {
-            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, 1 * Time.deltaTime);
+            sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, 3 * Time.deltaTime);
             yield return null;
         }
 
@@ -147,13 +151,17 @@ public class SliderManager : MonoBehaviour
         {
             if (decreaseintegrityDueToLackOfResources == null)
             {
-                //ItweenManager.instance.PunchScaleSlider(slider, 5);
+                ItweenManager.instance.ItweenMoveTo(LACK_OF_RESOURCE_MESSAGE);
+
+                sliderData.integrityText.text = "Integrity Taking Damage - Increase Resource";
                 decreaseintegrityDueToLackOfResources = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine()); //if not already active
             }
         }
         else
         {
             StopDecreaseIntegrityDueToLackOfResources();
+
+
         }
 
     }
@@ -172,6 +180,7 @@ public class SliderManager : MonoBehaviour
         if (decreaseintegrityDueToLackOfResources != null)
         {
             StopCoroutine(decreaseintegrityDueToLackOfResources);
+            ItweenManager.instance.ItweenMoveBack(LACK_OF_RESOURCE_MESSAGE);
 
             decreaseintegrityDueToLackOfResources = null;
 
@@ -310,7 +319,14 @@ public class SliderManager : MonoBehaviour
         ItweenManager.instance.PunchScaleText(sliderData.automatedText);
         for (float i = sliderData.automationSlider.value; i > 0; i -= Time.deltaTime)
         {
+            
+            if (Time.timeScale == 0)
+            {
+                yield return new WaitUntil(() => Time.timeScale != 0);
+            }
+            
             sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.automationSlider, 0.05f);
+
             if (sliderData.automationSlider.value <= 2)
             {
                 sliderData.automated = false;
@@ -318,18 +334,22 @@ public class SliderManager : MonoBehaviour
                 sliderData.automatedText.text = null;
                 sliderData.informationText.text = null;
                 automationRout = null;
+
                 if (chargeAutomationRout == null)
                 {
                     AudioManager.instance.StopLoop(AudioManager.EventType.CounterMeasuresAutomated);
                     chargeAutomationRout = StartCoroutine(ChargeCounterMeasureAutomationRoutine());
                 }
-                yield return null;
-                yield break;
+
+                break;
+
             }
 
             yield return null;
 
         }
+
+        yield break;
 
     }
     private IEnumerator ChargeCounterMeasureAutomationRoutine()

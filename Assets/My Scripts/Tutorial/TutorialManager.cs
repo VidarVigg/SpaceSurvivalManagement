@@ -121,11 +121,11 @@ public class TutorialManager : MonoBehaviour
             case 9:
                 if (startButtonActive)
                 {
-                    ItweenManager.instance.ItweenMoveBack(6);
+                    ItweenManager.instance.ItweenMoveBack(7);
                 }
                 break;
             case 10:
-                ItweenManager.instance.ItweenMoveTo(6);
+                ItweenManager.instance.ItweenMoveTo(7);
                 startButtonActive = true;
                 break;
         }
@@ -137,7 +137,7 @@ public class TutorialManager : MonoBehaviour
     public void StartGame()
     {
         ItweenManager.instance.ItweenMoveTo(3);
-        ItweenManager.instance.ItweenMoveBack(6);
+        ItweenManager.instance.ItweenMoveBack(7);
         StartCoroutine(StartGameRoutine());
     }
     private IEnumerator StartGameRoutine()

@@ -17,7 +17,6 @@ public class SpaceTimeManager : MonoBehaviour
 
         spaceTimeData.currentDistance = spaceTimeConfig.distanceToGoal;
         spaceTimeData.velocity = spaceTimeConfig.distanceToGoal / spaceTimeConfig.timeToGoal;
-
         startDecreaseLightyears();
     }
 
