@@ -126,7 +126,7 @@ public class SliderManager : MonoBehaviour
             }
 
 
-            AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
+            AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
             sliderData.structArray[index].routine = null;
 
             yield break;
@@ -208,7 +208,7 @@ public class SliderManager : MonoBehaviour
                 StopCoroutine(sliderData.structArray[index].routine);
                 sliderData.structArray[index].routine = null;
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.structArray[index].counterSlider, 30);
-                AudioManager.instance.StopLoop(AudioManager.EventType.ShipIntegrityDamage);
+                AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
 
 
             }
@@ -337,7 +337,7 @@ public class SliderManager : MonoBehaviour
 
                 if (chargeAutomationRout == null)
                 {
-                    AudioManager.instance.StopLoop(AudioManager.EventType.CounterMeasuresAutomated);
+                    AudioManager.instance.TryStopLoop(AudioManager.EventType.CounterMeasuresAutomated);
                     chargeAutomationRout = StartCoroutine(ChargeCounterMeasureAutomationRoutine());
                 }
 

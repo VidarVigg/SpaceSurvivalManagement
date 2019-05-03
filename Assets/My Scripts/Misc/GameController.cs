@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     bool pauseMenuActive;
 
-    
+
 
     private void Awake()
     {
@@ -39,17 +39,10 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
-
-                pauseMenuActive = true;
-            Debug.Log("Pauawrqefwfsed");
+            pauseMenuActive = true;
             pauseCanvas.enabled = true;
-                Time.timeScale = 0;
-                Debug.Log("Paused");
-                AudioManager.instance.PlayLoop(AudioManager.EventType.MuteAll);
-          
-
-
+            Time.timeScale = 0;
+            AudioManager.instance.PlayLoop(AudioManager.EventType.MuteAll);
         }
 
     }

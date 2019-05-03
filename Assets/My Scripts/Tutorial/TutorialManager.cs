@@ -37,6 +37,18 @@ public class TutorialManager : MonoBehaviour
         TutorialProgress(currentPrompt);
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            TutorialProgressFwd();
+
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            TutorialProgressBack();
+        }
+    }
     public void TutorialProgressBack()
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -58,6 +70,9 @@ public class TutorialManager : MonoBehaviour
 
         switch (progress)
         {
+
+            case 1:
+                break;
             case 3:
                 if (fuelGame == true)
                 {
@@ -132,7 +147,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void PunchToHilightPanel(RectTransform panel, int index)
     {
-        iTween.PunchScale(prompts[index].panel.gameObject, new Vector3(0.5f, 0.5f, 0.5f), 2f);
+        iTween.PunchScale(prompts[index].panel.gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1f);
     }
     public void StartGame()
     {
