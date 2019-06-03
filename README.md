@@ -1,2 +1,2 @@
 # SpaceSurvivalManagement
-Individual school project developed in one month at Yrgo Game Programmer
+Developed in one month as an assignment at Yrgo Game Programmer
