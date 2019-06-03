@@ -23,7 +23,7 @@ public class NumberFeedback : MonoBehaviour
         Decrease,
     }
 
-
+    //Spawn feedback text based on parameters sent in to function
     public void SpawnText(float value, SpawnAtMouseOrObject spawnmode, IncreaseOrDecrease increaseOrDecrease)
     {
         if (spawnmode == SpawnAtMouseOrObject.Mouse)

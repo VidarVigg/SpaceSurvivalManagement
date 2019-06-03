@@ -19,6 +19,8 @@ public class CollectO2Manager : MonoBehaviour
     {
        
     }
+
+    // Increases O2 Value when the slider reaches certain levels.
     public void IncreaseO2ValueOnButtonPress()
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -55,7 +57,7 @@ public class CollectO2Manager : MonoBehaviour
             Debug.Log("4");
         }
     }
-
+    // Constantly decreasing o2 value. Purpose of the minigame is to counteract this.
     private IEnumerator DecreaseO2Value()
     {
         for (; ; )
@@ -94,6 +96,8 @@ public class CollectO2Manager : MonoBehaviour
         ItweenManager.instance.ItweenMoveTo(1);
         minigameActivated = true;
     }
+
+    // Resets Minigame
     public void DeactivateO2Minigame()
     {
         StopCoroutine(DecreaseO2Value());
@@ -104,7 +108,6 @@ public class CollectO2Manager : MonoBehaviour
         goal3 = false;
         goal4 = false;
         minigameActivated = false;
-        //collectO2Config.o2MinigameCanvas.enabled = false;
     }
 
 

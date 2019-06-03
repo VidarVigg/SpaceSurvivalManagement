@@ -23,6 +23,7 @@ public class SpaceTimeManager : MonoBehaviour
     public void startDecreaseLightyears()
     {
         StartCoroutine(DecreaseLightYears());
+
     }
 
     private IEnumerator DecreaseLightYears()
@@ -36,7 +37,6 @@ public class SpaceTimeManager : MonoBehaviour
                 GameController.instance.Win();
                 yield break;
             }
-            //Debug.Log(spaceTimeData.currentDistance.ToString("0.00"));
             yield return null;
         }
     }

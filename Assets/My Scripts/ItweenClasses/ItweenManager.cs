@@ -9,10 +9,8 @@ public class ItweenManager : MonoBehaviour
 {
 
     public static ItweenManager instance;
-
-    //public ItweenData itweenData = new ItweenData();
-    public iTweenStruct[] itweenElements = null;
-    public GameObject[] screenShakeElements = new GameObject[0];
+    [SerializeField] iTweenStruct[] itweenElements = null;
+    [SerializeField] GameObject[] screenShakeElements = new GameObject[0];
     public Vector3 screenShakeAmount = new Vector3();
     private Coroutine screenShakeRoutine;
     
@@ -38,14 +36,8 @@ public class ItweenManager : MonoBehaviour
     {
         instance = this;
     }
-    private void Update()
-    {
-        //for (int i = 0; i < itweenElements.Length; i++)
-        //{
-        //    itweenElements[i].currentPos = itweenElements[i].itemToTween.GetComponent<RectTransform>().position;
-        //}
-    }
     
+    // Move GameObject at index in the array of structs using itween
     public void ItweenMoveTo(int index)
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.PanelAcivated);
@@ -56,6 +48,7 @@ public class ItweenManager : MonoBehaviour
         AudioManager.instance.PlayOneShot(AudioManager.EventType.PanelDeactivated);
         iTween.MoveTo(itweenElements[index].itemToTween, iTween.Hash("position", itweenElements[index].startPos, "time", 1, "easetype", itweenElements[index].easeType));
     }
+    // Punch GameObject at index in the array of structs using itween
     public void PunchScaleSlider(Slider slider, float speed = 0.3f)
     {
         iTween.PunchScale(slider.gameObject, Vector3.one, speed);
@@ -65,6 +58,8 @@ public class ItweenManager : MonoBehaviour
         iTween.PunchScale(text.gameObject, Vector3.one, time);
     }
 
+
+    // Punching All the elements in screenShakeElements to simulate screen shake.
     public void ScreenShaking()
     {
         for (int i = 0; i < screenShakeElements.Length; i++)

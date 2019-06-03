@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class SliderManager : MonoBehaviour
 {
-
-    public const int LACK_OF_RESOURCE_MESSAGE = 6;
-
     public SliderConfig sliderConfig = new SliderConfig();
     public SliderController sliderController = new SliderController();
     public SliderData sliderData = new SliderData();
-    public Coroutine automationRout;
-    public Coroutine chargeAutomationRout;
     public Coroutine randomEventRoutine;
+     Coroutine automationRout;
+     Coroutine chargeAutomationRout;
 
     private Coroutine decreaseintegrityDueToLackOfResources;
     public GameObject textFeedbackPrefab;
     public NumberFeedback numberfeedback;
 
+
+    // Struct that holds sliders, messages and coroutines. This ties specific sliders to specific coroutines.
     [System.Serializable]
     public struct EventStruct
     {
@@ -28,7 +27,6 @@ public class SliderManager : MonoBehaviour
         public string message;
         public Coroutine routine;
         public Slider counterSlider;
-
 
         public EventStruct(Slider slider, string message, Coroutine routine, Slider counterSlider)
         {
@@ -61,21 +59,18 @@ public class SliderManager : MonoBehaviour
             randomEventRoutine = StartCoroutine(RandomEventRoutine());
         }
     }
-    public void SpawnTextFeedback()
-    {
-        GameObject textClone = Instantiate(textFeedbackPrefab, sliderData.textFeedbackCanvas);
-        Destroy(textClone, 1);
 
-    }
+    //Checks ship integrity slider value, on value changed.
     public void CheckIntegrity()
     {
         if (sliderData.integritySlider.value == sliderData.integritySlider.minValue)
         {
-            //sliderData.text.text = GameController.instance.GameOver();
             GameController.instance.GameOver();
             StopCoroutine(randomEventRoutine);
         }
     }
+
+    //Coroutine that initiates random events, warnings, and alerts.
     public IEnumerator RandomEventRoutine()
     {
         while (true)
@@ -106,44 +101,39 @@ public class SliderManager : MonoBehaviour
 
 
     }
+    // Coroutine that make the ship integrity take damage
     private IEnumerator EventCoroutine(int index)
     {
         if (sliderData.automated == false)
         {
             AudioManager.instance.PlayOneShot(AudioManager.EventType.Alarm);
-
             yield return new WaitForSeconds(1);
-
             AudioManager.instance.PlayLoop(AudioManager.EventType.ShipIntegrityDamage);
             ItweenManager.instance.ScreenShaking();
 
             for (float i = 0; i < sliderData.integrityDecreaseDuration; i += Time.deltaTime)
             {
                 ItweenManager.instance.ScreenShaking();
-
                 sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, sliderData.integritySliderDecreaseAmount * Time.deltaTime);
                 yield return null;
             }
 
-
             AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
             sliderData.structArray[index].routine = null;
-
             yield break;
         }
 
     }
+
     private IEnumerator DecreaseIntegrityDueToLackOfResourcesRoutine()
     {
-
         for (; ; )
         {
             sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Decrease, ref sliderData.integritySlider, 3 * Time.deltaTime);
             yield return null;
         }
-
-
     }
+
     public void DecreaseIntegrityDueToLackOfResources(Slider slider)
     {
 
@@ -151,17 +141,14 @@ public class SliderManager : MonoBehaviour
         {
             if (decreaseintegrityDueToLackOfResources == null)
             {
-                ItweenManager.instance.ItweenMoveTo(LACK_OF_RESOURCE_MESSAGE);
-
+                ItweenManager.instance.ItweenMoveTo(6);
                 sliderData.integrityText.text = "Integrity Taking Damage - Increase Resource";
-                decreaseintegrityDueToLackOfResources = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine()); //if not already active
+                decreaseintegrityDueToLackOfResources = StartCoroutine(DecreaseIntegrityDueToLackOfResourcesRoutine());
             }
         }
         else
         {
             StopDecreaseIntegrityDueToLackOfResources();
-
-
         }
 
     }
@@ -174,18 +161,17 @@ public class SliderManager : MonoBehaviour
             {
                 return;
             }
-
         }
 
         if (decreaseintegrityDueToLackOfResources != null)
         {
             StopCoroutine(decreaseintegrityDueToLackOfResources);
-            ItweenManager.instance.ItweenMoveBack(LACK_OF_RESOURCE_MESSAGE);
-
+            ItweenManager.instance.ItweenMoveBack(6);
             decreaseintegrityDueToLackOfResources = null;
-
         }
     }
+
+    // Stops the active random event
     public void StopEvent(int index)
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -220,12 +206,15 @@ public class SliderManager : MonoBehaviour
             }
         }
     }
+
+   // Called when one resource is to be exchanged for another
     public void ExchangeResources(int index)
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
+        
+        // Rules for resource exchanging
         if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount || sliderData.structArray[index].slider.value + sliderData.exchangeAmount > sliderData.structArray[index].slider.maxValue)
         {
-
             if (sliderData.structArray[index].counterSlider.value < sliderData.exchangeAmount)
             {
                 sliderController.ExchangeResources(ref sliderData.structArray[index].slider, ref sliderData.structArray[index].counterSlider, sliderData.structArray[index].counterSlider.value);
@@ -247,6 +236,8 @@ public class SliderManager : MonoBehaviour
             ItweenManager.instance.PunchScaleSlider(sliderData.structArray[index].slider);
         }
     }
+
+
     public void IncreasResourceDirectly(int index, float amount)
     {
         sliderController.ChangeResourceValues(SliderController.InceaseOrDecrease.Increase, ref sliderData.structArray[index].slider, amount);
@@ -290,6 +281,8 @@ public class SliderManager : MonoBehaviour
             return;
         }
     }
+
+    // When called activates a countermeasure that correspond to the random event (coroutine) contained in the struct array.
     public void ActivateCounterMeasureAutomation()
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -312,6 +305,7 @@ public class SliderManager : MonoBehaviour
 
 
     }
+ 
     private IEnumerator CounterMesureAutomationRoutine()
     {
         sliderData.automated = true;

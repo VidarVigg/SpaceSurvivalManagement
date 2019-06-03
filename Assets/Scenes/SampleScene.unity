@@ -12476,6 +12476,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7679937250818513193, guid: d38c83ab9e0a8934eb2450a469b100aa,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1999
+      objectReference: {fileID: 0}
     - target: {fileID: 7767469024003766454, guid: d38c83ab9e0a8934eb2450a469b100aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

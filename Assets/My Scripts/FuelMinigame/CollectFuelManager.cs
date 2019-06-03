@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Main class that controlls the Fuel collecting minigame
 public class CollectFuelManager : MonoBehaviour
 {
     public CollectFuelConfig collectFuelConfig = new CollectFuelConfig();
@@ -28,7 +29,7 @@ public class CollectFuelManager : MonoBehaviour
         collectFuelData.collectFuelCanvas = collectFuelConfig.collectFuelCanvas;
 
     }
-
+    // Activation of Minigame
     public void ActivateCollectFuelMiniGame()
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -41,6 +42,7 @@ public class CollectFuelManager : MonoBehaviour
             DeactivateFuelMinigame();
         }
     }
+    //buttons spawn
     private IEnumerator SpawnButtonsRoutine()
     {
         for (int i = 0; i < collectFuelData.buttons.Length; i++)
@@ -52,6 +54,8 @@ public class CollectFuelManager : MonoBehaviour
         spawnGoodButton = StartCoroutine(EventifyRandomButton());
         yield break;
     }
+
+    // Random button gets a click event, and a highlight color.
     private IEnumerator EventifyRandomButton()
     {
         for (int j = 0; j < 5; j++)
@@ -64,7 +68,6 @@ public class CollectFuelManager : MonoBehaviour
             
         }
         yield return new WaitForSeconds(1);
-        //collectFuelData.collectFuelCanvas.enabled = false;
         DeactivateFuelMinigame();
         spawnButtons = null;
         yield return null;
@@ -75,7 +78,6 @@ public class CollectFuelManager : MonoBehaviour
     {
 
         fuelMinigameActivated = true;
-        //collectFuelData.collectFuelCanvas.enabled = true;
         ItweenManager.instance.ItweenMoveTo(0);
         if (spawnButtons == null)
         {
@@ -102,6 +104,8 @@ public class CollectFuelManager : MonoBehaviour
         ItweenManager.instance.ItweenMoveBack(0);
         NullAllButtons();
     }
+
+    // Reset all buttons
     public void NullAllButtons()
     {
         for (int i = 0; i < collectFuelData.buttons.Length; i++)
@@ -110,6 +114,7 @@ public class CollectFuelManager : MonoBehaviour
             collectFuelData.buttons[i] = null;
         }
     }
+    // Resets Clicked Button
     public void NullClickedButton(GameObject button)
     {
         collectFuelController.ActivateBadButton(button, this);

@@ -13,9 +13,9 @@ public class CollectPowerManager : MonoBehaviour
     bool powerMinigameActivated;
     bool submitted;
 
+    // Comparing the texts from the inputfield to the required combination of characters
     public void CompareTexts(InputField inputField)
     {
-        //IncreaseNumberOfIterations();
         if (inputField.text.Length != collectPowerData.combination.Length)
         {
             collectPowerConfig.rightOrWrong.color = new Color(255, 0, 0);
@@ -34,10 +34,9 @@ public class CollectPowerManager : MonoBehaviour
         rightOrWrongMessageRoutine = StartCoroutine(RightOrWrongMessageRoutine(collectPowerData.right, inputField));
         sliderManager.IncreasResourceDirectly(1, 10f);
         AudioManager.instance.PlayOneShot(AudioManager.EventType.NumberFeedback);
-
-
     }
 
+    // Displays message based on wrong or right input. Also increases the number of input iterations to make the game close after five inputs.
     private IEnumerator RightOrWrongMessageRoutine(string message, InputField inputField)
     {
         collectPowerConfig.numberOfIterations += 1;
@@ -60,8 +59,6 @@ public class CollectPowerManager : MonoBehaviour
             DeactivateCollectPowerGame();
             yield break;
         }
-
-
     }
 
     public void Submit(InputField inputField)
@@ -72,23 +69,8 @@ public class CollectPowerManager : MonoBehaviour
             CompareTexts(inputField);
 
         }
-
-
-
     }
 
-    public void IncreaseNumberOfIterations()
-    {
-        if (collectPowerConfig.numberOfIterations < 4)
-        {
-            collectPowerConfig.numberOfIterations += 1;
-        }
-        else
-        {
-            DeactivateCollectPowerGame();
-
-        }
-    }
     public void ActivateCollectPowerGame()
     {
         AudioManager.instance.PlayOneShot(AudioManager.EventType.ButtonSound);
@@ -99,7 +81,6 @@ public class CollectPowerManager : MonoBehaviour
         else
         {
             StartCollectPowerMinigame();
-
         }
     }
     public void StartCollectPowerMinigame()
@@ -107,14 +88,12 @@ public class CollectPowerManager : MonoBehaviour
         submitted = false;
         powerMinigameActivated = true;
         ItweenManager.instance.ItweenMoveTo(2);
-        //collectPowerConfig.collectPowerCanvas.enabled = true;
         collectPowerController.GenerateAndApply(ref collectPowerData, collectPowerConfig, collectPowerConfig.combinationText);
     }
     public void DeactivateCollectPowerGame()
     {
         powerMinigameActivated = false;
         ItweenManager.instance.ItweenMoveBack(2);
-        //collectPowerConfig.collectPowerCanvas.enabled = false;
         collectPowerConfig.numberOfIterations = 0;
     }
     public void GenerateNewCode()

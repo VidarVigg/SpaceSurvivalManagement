@@ -69,9 +69,9 @@ public class GameController : MonoBehaviour
     }
     public void Restart()
     {
+        
         AudioManager.instance?.PlayOneShot(AudioManager.EventType.ButtonSound);
         SceneManager.LoadScene("SampleScene");
-        Time.timeScale = 1;
         AudioManager.instance.TryStopLoop(AudioManager.EventType.MuteAll);
         AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
         AudioManager.instance.TryStopLoop(AudioManager.EventType.EngineSound);
@@ -93,8 +93,10 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("GameOver");
         AudioManager.instance.TryStopLoop(AudioManager.EventType.EngineSound);
+        AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
         AudioManager.instance.TryStopLoop(AudioManager.EventType.CounterMeasuresAutomated);
         loseCanvas.enabled = true;
+
 
     }
 
@@ -106,6 +108,7 @@ public class GameController : MonoBehaviour
         AudioManager.instance.TryStopLoop(AudioManager.EventType.ShipIntegrityDamage);
         AudioManager.instance.TryStopLoop(AudioManager.EventType.EngineSound);
         AudioManager.instance.TryStopLoop(AudioManager.EventType.CounterMeasuresAutomated);
+
     }
     public void RestartGame()
     {
